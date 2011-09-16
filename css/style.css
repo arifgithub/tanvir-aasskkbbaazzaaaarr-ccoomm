@@ -1,0 +1,60 @@
+/* AskBazaar Style */
+
+/* Common */
+body{
+    background-color: #FFFFFF;
+    margin: 0;
+    font-size: 12px;
+}
+ul{ list-style: none; }
+.black_text11_BOLD {
+    color: #000000;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: bold;
+}
+.black_text12_BOLD {
+    color: #000000;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.red{
+    border: 1px solid #FF0000;
+}
+.green{
+    border: 1px solid #159E00;
+}
+.blue{
+    border: 1px solid #0025AD;
+}
+
+#container{
+    width: 990px;
+    margin: 0 auto;
+    position: relative;
+}
+#header{
+    position: relative;
+}
+#header .right-block{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+ul.right-block li{
+    display: inline-block;
+}
+ul.right-block li.site-welcome{ padding-right: 35px; }
+ul.right-block li.nav a:link,
+ul.right-block li.nav a:visited{
+    color: #376092;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+}
+ul.right-block li.nav a:hover{
+    text-decoration: underline;
+}
