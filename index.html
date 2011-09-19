@@ -7,9 +7,27 @@
     
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     
-    <link type="text/css" rel="stylesheet" media="all" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     
-    <script type="text/javascript" src="js/"></script>
+    <!-- link to the CSS files for this menu type -->
+    <link rel="stylesheet" media="screen" href="js/superfish/css/superfish.css" />
+    <link rel="stylesheet" media="screen" href="js/superfish/css/superfish-vertical.css" />
+    
+    <!-- link to the JavaScript files (hoverIntent is optional) -->
+    <script type="text/javascript" src="js/superfish/js/hoverIntent.js"></script> 
+    <script type="text/javascript" src="js/superfish/js/superfish.js"></script> 
+     
+    <!-- initialise Superfish -->
+    <script type="text/javascript">
+        $(document).ready(function(){ 
+            $("ul.sf-menu").superfish({ 
+                animation: {height:'show'},   // slide-down effect without fade-in 
+                delay:     1200               // 1.2 second delay on mouseout 
+            }); 
+        });
+    </script>
+    
+    <link type="text/css" rel="stylesheet" media="all" href="css/style.css" />
 </head>
 
 <body>
@@ -25,21 +43,112 @@
                 <a href="#">Sign up</a>
             </li>
         </ul>
+        <div class="free-offer">
+            <img border="0" width="152" height="56" usemap="#Map" src="images/theme/post_new_product_free.jpg" />
+            <map id="Map" name="Map"><area href="#" coords="7,32,144,52" shape="rect"></map>
+        </div>
     </div>
     <!-- /#header -->
     
-    <div id="searchbar"></div>
+    <div id="searchbar">
+        <ul>
+            <li><input class="search-key" type="text" size="40" value="Select Products" name="textfield" /></li>
+            <li>
+                <select name="select" class="search-location">
+                    <option>Select Location</option>
+                </select>
+            </li>
+            <li><input type="submit" value="Search" name="Submit" class="btn-submit" /></li>
+            <li class="advance-search"><a class="advance_search_link" href="#">ADVANCE SEARCH </a></li>
+        </ul>
+    </div>
     <!-- /#searchbar -->
     
-    <div id="content-top-ad"></div>
+    <div id="content-top-ad">
+        <img width="990" height="50" src="images/other/ad1.jpg">
+    </div>
     <!-- /#content-top-ad -->
     
     <div id="content">
         
-        <div id="leftbar"></div>
+        <div id="leftbar">
+            
+            <ul id="left-nav" class="sf-menu sf-vertical sf-js-enabled sf-shadow grey-border">
+                <li class="left-nav-title">Categories</li>
+                <li class="current">
+                    <a class="sf-with-ul" href="#a">Agriculture</a>
+                    <ul style="display: none; visibility: hidden; ">
+                        <li>
+                            <a href="#aa">sample child menu</a>
+                        </li>
+                        <li class=""><a class="sf-with-ul" href="#">sample child menu</a></li>
+                        <li class=""><a class="sf-with-ul" href="#">sample child menu</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Autos & Motorcycle</a></li>
+                <li><a href="#">Business Service</a></li>
+                <li><a href="#">Computer & Hardware & IT</a></li>
+                <li><a href="#">Construction & Real Estate</a></li>
+                <li><a href="#">Customer Electronics</a></li>
+                <li><a href="#">Event</a></li>
+                <li><a href="#">Fashion & Style</a></li>
+                <li><a href="#">Gift & Craf</a></li>
+                <li><a href="#">Home & Personal</a></li>
+                <li><a href="#">Job</a></li>
+                <li><a href="#">Mobil</a></li>
+                <li><a href="#">Machineries & Industry</a></li>
+                <li><a href="#">Office Support</a></li>
+                <li><a href="#">Packaging & Printing</a></li>
+                <li><a href="#">Rent</a></li>
+                <li><a href="#">Sports & Entertainment</a></li>
+                <li><a href="#">Toys & Hobbies</a></li>
+                <li class="more-cat"><a href="#">More Categories</a></li>
+            </ul>
+            <!-- /#left-nav -->
+
+        </div>
         <!-- /#leftbar -->
         
-        <div id="main-content"></div>
+        <div id="main-content">
+            <div class="content-top">
+                <ul class="content-top-ad-block two-col">
+                    <li class="col1"><img class="grey-border" width="279" height="103" src="images/other/ad2.jpg"></li>
+                    <li class="col2"><img class="grey-border" width="279" height="103" src="images/other/ad2.jpg"></li>
+                    <li class="col1"><img class="grey-border" width="279" height="103" src="images/other/ad2.jpg"></li>
+                    <li class="col2"><img class="grey-border" width="279" height="103" src="images/other/ad2.jpg"></li>
+                    <br class="clear"/>
+                </ul>
+                <!-- /.content-top-add-block -->
+                
+                <div class="account-nav myAskBazar_box">
+                    <div class="MyAskBazar_text12_BOLD title">Welcome To Askbazaar.com</div>
+                    <div class="menu-links myAskBazar_box">
+                        <ul>
+                            <li><img align="absmiddle" width="18" height="14" src="images/theme/myAskBazaar_icon.jpg"></li>
+                            <li>
+                                <a href="#" class="MyAskBazar_link11">My Askbazaar</a>
+                                <span class="orange_text10">(Post New Product)</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><img align="absmiddle" width="18" height="18" src="images/theme/my_favorite_icon.jpg"></li>
+                            <li><a class="MyAskBazar_link11" href="#">My Favorite</a></li>
+                        </ul>
+                        <a href="#"><img border="0" width="130" height="39" src="images/theme/join_free_button.jpg"></a><br/>
+                        <div class="Aash_text12">
+                            Already Member <a href="#" class="sign_in_link">Sign In</a> 
+                        </div>
+                        <div class="myAskBazar_PURPLE_box">
+                            <span class="myAskBazar_PURPLE_box_TEXT">Create Your Webpage Promote Your Products </span><br>
+                            <span class="myAskBazar_PURPLE_box_REDTEXT">Free ! </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.account-nav -->
+                <br class="clear"/>
+            </div>
+            <!-- /.content-top -->
+        </div>
         <!-- /#main-content -->
         
     </div>
