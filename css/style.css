@@ -148,6 +148,8 @@ a.advance_search_link:link {
 .sf-menu a:hover{
     color: #C40000;
     text-decoration: underline;
+    background: url("../images/theme/arrow.jpg") no-repeat scroll 174px 9px transparent;
+    background-color: #FFF;
 }
 .sf-menu li, .sf-menu li:hover, .sf-menu li.sfHover{
     background: url("../images/theme/arrow.jpg") no-repeat scroll 175px 10px transparent;
