@@ -106,10 +106,11 @@ ul.right-block li.nav a:hover{
     background-color: #fff;
     margin-right: 5px;
     height: 27px;
+    color: #6c6c6c;
 }
 #searchbar .search-key{ height: 23px; width: 520px;}
-#searchbar .search-location{ width: 200px; }
-#searchbar .btn-submit{ width: 115px; }
+#searchbar .search-location{ width: 200px; padding-top: 3px;}
+#searchbar .btn-submit{ width: 115px; color: #000;}
 #searchbar .advance-search{ padding: 5px 0 0 5px;}
 a.advance_search_link,
 a.advance_search_link:link {
