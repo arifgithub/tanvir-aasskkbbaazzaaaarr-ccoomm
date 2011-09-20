@@ -344,3 +344,10 @@ a.sign_in_link, a.sign_in_link:link {
     background: url("../images/theme/bottom_bg.jpg") repeat-x scroll 0 0 transparent;
     height: 180px;
 }
+a.bottom_link,a.bottom_link:link {
+    color: #0070C0;
+    font-family: Arial;
+    font-size: 12px;
+    text-decoration: none;
+}
+a.bottom_link:hover{ text-decoration: underline; }
