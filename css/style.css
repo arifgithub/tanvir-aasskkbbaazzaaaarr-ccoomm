@@ -29,12 +29,27 @@ ul{ list-style: none; margin: 0; padding: 0;}
     font-family: Arial;
     font-size: 12px;
 }
-.grey-border, .gray-border{
+a.product_link,a.product_link:link {
+    color: #376092;
+    font-family: Arial;
+    font-size: 11px;
+    text-decoration: none;
+}
+a.product_link:hover{ text-decoration: underline; }
+a.price_link,a.price_link:link {
+    color: #E46C0A;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+}
+a.price_link:hover{ text-decoration: underline; }
+.grey-box, .gray-box{
     border: 1px solid #BFBFBF;
 }
-.clear{
-    clear: both;
-}
+.clear{ clear: both; }
+.flt-right{ float: right; }
+.flt-left{ float: left; }
 
 .red{
     border: 1px solid #FF0000;
@@ -178,7 +193,7 @@ a.advance_search_link:link {
 ******************************************************/
 #main-content{
     /*border: 1px solid red;*/
-    width: 790px;
+    width: 785px;
     float: right;
 }
 /* Content top Ad panel */
@@ -253,3 +268,16 @@ a.sign_in_link, a.sign_in_link:link {
     font-size: 14px;
     font-weight: bold;
 }
+
+/* Best sell products */
+.best-sell-row{ margin-top: 5px; }
+.best-sell-prod{ padding: 5px 5px 8px; width: 490px;}
+.best-sell-prod ul li{
+    padding: 2px 5px;
+    width: 143px;
+    margin-left: 10px;
+}
+.best-sell-prod ul li.first{ margin-left: 0; }
+.best-sell-right-ad{ width: 275px; }
+.best-sell-right-ad ul li{ width: 132px; }
+.best-sell-right-ad ul li.col2{ margin-right: 5px; }
