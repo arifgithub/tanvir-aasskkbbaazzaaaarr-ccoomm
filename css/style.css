@@ -179,6 +179,7 @@ a.advance_search_link:link {
     font-size: 12px;
     padding: 10px;
     text-decoration: none;
+    line-height: 5px;
 }
 .sf-menu a:hover{
     color: #C40000;
@@ -188,11 +189,14 @@ a.advance_search_link:link {
 }
 .sf-menu li, .sf-menu li:hover, .sf-menu li.sfHover{
     background: url("../images/theme/arrow.jpg") no-repeat scroll 175px 10px transparent;
+    height: 25px;
 }
 .sf-menu .more-cat{
     background: url("../images/theme/more_categories_arrow.jpg") no-repeat scroll 170px 10px transparent;
+    height: 30px !important;
 }
 .sf-menu .more-cat a, .sf-menu .more-cat a:link{
+    height: 30px !important;
     color: #E46C0A;
     font-family: Arial;
     font-size: 13px;
@@ -201,7 +205,7 @@ a.advance_search_link:link {
     text-decoration: none;
     background: url("../images/theme/more_categories_arrow.jpg") no-repeat scroll 170px 10px transparent;
 }
-.more-cat a:focus, .more-cat a:hover, .more-cat a:active{
+.sf-menu .more-cat a:focus, .sf-menu .more-cat a:hover, .sf-menu .more-cat a:active{
     color: #C40000;
     text-decoration: underline;
     background: url("../images/theme/more_categories_arrow.jpg") no-repeat scroll 170px 10px transparent;
