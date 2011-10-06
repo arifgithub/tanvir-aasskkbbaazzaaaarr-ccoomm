@@ -12,10 +12,10 @@
     <link type="text/css" rel="stylesheet" media="all" href="css/style.css" />
 </head>
 
-<body>
+<body class="search-result">
 <div id="container">
     
-    <div id="header">
+    <div id="header" class="bottom-space10">
         <img width="225" height="91" src="./images/theme/logo.jpg" />
         <ul class="right-block">
             <li class="site-welcome black_text12_BOLD">Welcome: AskBazaar.com</li>
@@ -25,31 +25,69 @@
                 <a href="#">Sign up</a>
             </li>
         </ul>
-        <div class="free-offer">
-            <img border="0" width="152" height="56" usemap="#Map" src="images/theme/post_new_product_free.jpg" />
-            <map id="Map" name="Map"><area href="#" coords="7,32,144,52" shape="rect"></map>
+        <div class="free-offer"><a href="#" class="blue_text12_BOLD">ADVANCE SEARCH</a></div>
+        <div id="searchbar">
+            <ul>
+                <li><input class="search-key" type="text" size="40" value="Select Products" name="textfield" /></li>
+                <li>
+                    <select name="select" class="search-location">
+                        <option>Select Location</option>
+                    </select>
+                </li>
+                <li><input type="submit" value="Search" name="Submit" class="btn-submit" /></li>
+            </ul>
         </div>
+        <!-- /#searchbar -->
     </div>
     <!-- /#header -->
     
-    <div id="searchbar">
-        <ul>
-            <li><input class="search-key" type="text" size="40" value="Select Products" name="textfield" /></li>
-            <li>
-                <select name="select" class="search-location">
-                    <option>Select Location</option>
-                </select>
-            </li>
-            <li><input type="submit" value="Search" name="Submit" class="btn-submit" /></li>
-            <li class="advance-search"><a class="advance_search_link" href="#">ADVANCE SEARCH </a></li>
-        </ul>
-    </div>
-    <!-- /#searchbar -->
     
     <div id="content">
         
+        <div class="grey-box bottom-space10">
+            <img width="988" height="200" src="images/other/search_result_banner_ad.jpg" />
+        </div>
+        <div class="grey-box bottom-space10">
+            <img width="988" height="140" src="images/other/search_result_banner_ad-2.jpg" />
+        </div>
+        
+        <div id="result">
+            <div class="tab corner">
+                <ul class="company">
+                    <li class="left-top"></li>
+                    <li class="left"></li>
+                    <li class="right-top"></li>
+                    <li class="right"></li>
+                    <li class="link"><a href="javascript:void(0);" class="orange_link12">Company</a></li>
+                </ul>
+            </div>
+            <div class="tab corner">
+                <ul class="private">
+                    <li class="left-top"></li>
+                    <li class="left"></li>
+                    <li class="right-top"></li>
+                    <li class="right"></li>
+                    <li class="link"><a href="javascript:void(0);" class="orange_link12">Private</a></li>
+                </ul>
+            </div>
+            <!-- /.tab -->
+            
+            <div class="result-top-bar corner">
+                <br class="clear"/>
+                <ul>
+                    <li class="left-top"></li>
+                    <li class="left"></li>
+                    <li class="right-top"></li>
+                    <li class="right"></li>
+                    <li class="top-sell"><a href="javascript:void(0);" class="red_text12_Bold">Urgent Sell</a></li>
+                    <li class="top-sell"><a href="javascript:void(0);" class="orange_text12_Bold">Top Sell</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /#result -->
+        
         <div id="main-content" class="flt-right">
-
+        
         </div>
         <!-- /#main-content -->
         <br class="clear"/>
@@ -62,6 +100,10 @@
             <li>
                 <img align="absmiddle" width="26" height="37" src="images/theme/safety.jpg" />
                 <a class="MyAskBazar_link" href="#">Safety & Support </a>
+            </li>
+            <li>
+                <img align="absmiddle" width="35" height="35" src="images/theme/security.jpg" />
+                <a class="MyAskBazar_link" href="#">Askbazaar.com Security </a>
             </li>
             <li>
                 <img align="absmiddle" width="32" height="34" src="images/theme/advertise.jpg" />

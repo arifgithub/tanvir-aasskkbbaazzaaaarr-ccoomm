@@ -31,6 +31,18 @@ ul{ list-style: none; margin: 0; padding: 0;}
     font-family: Arial;
     font-size: 18px;
 }
+.orange_text12_Bold {
+    color: #E46C0A;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+}
+.red_text12_Bold {
+    color: #FF0404;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+}
 .Aash_text11 {
     color: #646464;
     font-family: Arial;
@@ -40,6 +52,12 @@ ul{ list-style: none; margin: 0; padding: 0;}
     color: #A6A6A6;
     font-family: Arial;
     font-size: 12px;
+}
+.blue_text12_BOLD {
+    color: #1F497D;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
 }
 a.product_link,a.product_link:link {
     color: #376092;
@@ -65,6 +83,15 @@ a.MyAskBazar_link, a.MyAskBazar_link:link {
     text-decoration: none;
 }
 a.MyAskBazar_link:hover{ text-decoration: underline; }
+a.orange_link12:link {
+    color: #E46C0A;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+}
+a.orange_link12:hover { text-decoration: underline; }
+
 .grey-box, .gray-box{ border: 1px solid #BFBFBF; }
 .blue-box{ border: 1px solid #B9CDE5; }
 .clear{ clear: both; }
@@ -368,3 +395,61 @@ a.bottom_link:hover{ text-decoration: underline; }
     bottom: 25px;
     left: 200px;
 }
+
+/*********************************
+*         Tab & Corner
+*********************************/
+.tab ul{ width: 120px; float: left; margin-right: 10px; }
+.tab li.link{ width: 100%; text-align: center; padding-top: 8px; }
+.result-top-bar li{
+    float: right;
+    margin-right: 25px;
+    padding-top: 8px;
+    text-align: right;
+    width: 100px;
+}
+.corner ul{
+    height: 30px;
+    position: relative;
+    background: url("../images/theme/corner_top_middle.jpg") repeat-x scroll 0 0 #EEF2FB;
+}
+.corner li.left,.corner li.left-top,
+.corner li.right,.corner li.right-top{
+    position: absolute; width: 20px; margin: 0; padding: 0;
+}
+.corner .left-top{
+    background: url("../images/theme/corner_left_top.jpg") no-repeat scroll 0 0 transparent;
+    height: 8px;
+    left: 0; top: 0;
+}
+.corner .left{
+    background: url("../images/theme/corner_left.jpg") repeat-y scroll 0 0 transparent;
+    height: 22px;
+    left: 0; top: 8px;
+}
+.corner .right-top{
+    background: url("../images/theme/corner_right_top.jpg") no-repeat scroll 11px 0 transparent;
+    height: 8px;
+    right: 0; top: 0;
+}
+.corner .right{
+    background: url("../images/theme/corner_right.jpg") repeat-y scroll 11px 0 transparent;
+    height: 22px;
+    right: 0; top: 8px;
+}
+
+/************************************************
+ *                 Page Specific
+ ***********************************************/
+/* Search Result page */
+.search-result #searchbar .search-key{ width: 393px;}
+.search-result #searchbar{
+    width: 720px;
+    float: right;
+    margin-top: 60px;
+    height: 27px;
+    padding: 3px;
+}
+.search-result #searchbar .btn-submit{ margin-right: 0; }
+.search-result #header .free-offer{ top: 35; }
+.search-result .footer-hotmenu{ text-align: left; }
