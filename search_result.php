@@ -96,7 +96,7 @@
             </div>
             <!-- /.result-top-bar -->
             <div class="result-item-list">
-                <?php for($i=0; $i<=5; $i++): ?>
+                <?php for($i=1; $i<=3; $i++): ?>
                 <div class="item">
                     <ul class="item-topbar grey-box top-space10">
                         <li class="left black_text11_Bold">Rimixdot ltd <span class="Aash_text12">( Dhaka )</span></li>

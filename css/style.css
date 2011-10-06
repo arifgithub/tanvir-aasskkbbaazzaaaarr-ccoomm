@@ -543,7 +543,7 @@ a.bottom_link:hover{ text-decoration: underline; }
 .search-result #searchbar .btn-submit{ margin-right: 0; }
 .search-result #header .free-offer{ top: 35; }
 .search-result .footer-hotmenu{ text-align: left; }
-#result{ width: 760px; float: left; }
+#result{ width: 760px; float: left; margin-bottom: 50px; }
 .result-item-list .item-topbar{ height: 15px; padding: 5px 10px; }
 .result-item-list .item-topbar li.left{ float:left; }
 .result-item-list .item-topbar li.right{ float:right; margin-left: 20px; }
