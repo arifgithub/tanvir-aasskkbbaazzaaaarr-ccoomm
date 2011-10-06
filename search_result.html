@@ -21,7 +21,7 @@
             <li class="site-welcome black_text12_BOLD">Welcome: AskBazaar.com</li>
             <li class="nav">
                 <a href="#">Sign in</a>
-                <span class="black_text11_BOLD">|</span>
+                <span class="black_text11_Bold">|</span>
                 <a href="#">Sign up</a>
             </li>
         </ul>
@@ -72,6 +72,12 @@
             </div>
             <!-- /.tab -->
             
+            <div class="">
+                <span class="purple_text12">You can also view list of :</span>
+                <a class="orange_text16" href="#"><strong>Seller</strong></a> <span class="ash_text16_Bold"> | </span>
+                <a class="purple_text16_Bold" href="#"><strong>Buyer</strong></a>
+            </div>
+            
             <div class="result-top-bar corner">
                 <br class="clear"/>
                 <ul>
@@ -83,8 +89,99 @@
                     <li class="top-sell"><a href="javascript:void(0);" class="orange_text12_Bold">Top Sell</a></li>
                 </ul>
             </div>
+            <!-- /.result-top-bar -->
+            <div class="result-item-list">
+                <div class="item">
+                    <ul class="item-topbar grey-box top-space10">
+                        <li class="left black_text11_Bold">Rimixdot ltd <span class="Aash_text12">( Dhaka )</span></li>
+                        <li class="right seller orange_text12_Bold">Seller</li>
+                        <li class="right seller-other-prod"><a href="#" class="orange_text12_Bold">Seller others Product</a></li>
+                    </ul>
+                    <div class="item-body">
+                        <div class="col-left-1">
+                            <img border="0" width="100" height="90" src="images/other/product1.jpg" /><br/>
+                            <strong class="black_text11">Product ID abcd234</strong>
+                        </div>
+                        <div class="col-left-2">
+                            <a class="search_title_link12" target="_blank" href="#">Apple iphone Mobile</a>
+                            <div class="model black_text12 top-bottom-space5">14.1" TFT LCD panel (1280*800 B141EW04 V5)</div>
+                            <div class="black_text12 bottom-space10">
+                                computer peripherals service computers peripherals dealers , cpu , hardwares
+                                keyboards c omputer peripherals service pro fajsdlfjas...
+                            </div>
+                            <a class="purple_text12" href="#">Add To Favorite</a>
+                        </div>
+                        <div class="col-right top-space5">
+                            <div class="ash_text11"><strong>Payment:</strong> Bank Payment</div>
+                            <div class="ash_text11"><strong>Mini Order:</strong> 10 Pcs</div>
+                            <div class="ash_text11"><strong>Quantity Available:</strong> 100 Pcs</div>
+                            <div><strong class="orange_text14">Price:</strong> <strong class="black_text11">100 Taka</strong></div>
+                            <div>
+                                <strong class="green_text11_Bold right-space40">Verified</strong>
+                                <img width="16" height="13" align="absmiddle" src="images/theme/company_icon.jpg" />
+                                <span class="orange_text11_Bold">Company Ad</span>
+                            </div>
+                            <div>
+                                <strong class="red_text12_Bold right-space40">Hot Sell </strong>
+                                <a target="_blank" href="#"><img align="absmiddle" border="0" width="103" height="25" src="images/theme/contact_now.jpg" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.result-prod-list -->
         </div>
         <!-- /#result -->
+        
+        <div id="result-sidebar">
+            <div id="refine-search" class="corner bottom-space10">
+                <ul>
+                    <li class="left-top"></li>
+                    <li class="left"></li>
+                    <li class="right-top"></li>
+                    <li class="right"></li>
+                    <li class="title orange_text16_Bold">Refine your Search</li>
+                </ul>
+                <div class="search-form blue-box black_text11">
+                    <label for="selPriceRange">Price Range</label>
+                    <select class="ash_text11" name="selPriceRange">
+                        <option>Please Select</option>
+                    </select><br/>
+                    <label for="selItemCondition">Item Condition</label>
+                    <select class="ash_text11" name="selItemCondition">
+                        <option>Please Select</option>
+                    </select><br/>
+                    <label for="selLocation">Location</label>
+                    <select class="ash_text11" name="selLocation">
+                        <option>Please Select</option>
+                    </select><br/>
+                    <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
+                        <input type="submit" value="Search" class="black_text11 bottom-space10" name="Submit" /><br/>
+                        Any one option you can Choose <br>for Refine Your Search
+                    </div>
+                </div>
+            </div>
+            <!-- /#refine-search -->
+
+            <div id="search-by-prod" class="corner bottom-space10">
+                <ul>
+                    <li class="left-top"></li>
+                    <li class="left"></li>
+                    <li class="right-top"></li>
+                    <li class="right"></li>
+                    <li class="title orange_text16_Bold">Search by Product ID</li>
+                </ul>
+                <div class="search-form blue-box black_text11_Bold">
+                    <label for="txtProductID">Product ID</label>
+                    <input type="text" size="15" value="Enter Product ID" class="ash_text11" name="txtProductID" />
+                    <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
+                        <input type="submit" value="Search" class="black_text11 bottom-space10 submit" name="Submit" /><br/>
+                        Any one product you can search <br/>by Product ID 
+                    </div>
+                </div>
+            </div>
+            <!-- /#search-by-prod -->
+        </div>
         
         <div id="main-content" class="flt-right">
         
