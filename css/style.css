@@ -133,6 +133,13 @@ ul{ list-style: none; margin: 0; padding: 0;}
     font-size: 12px;
     font-weight: bold;
 }
+a.blue_link_12:link {
+    color: #1F497D;
+    font-family: Arial;
+    font-size: 12px;
+    text-decoration: none;
+}
+a.blue_link_12:hover{ text-decoration: underline; }
 a.product_link,a.product_link:link {
     color: #376092;
     font-family: Arial;
@@ -523,6 +530,8 @@ a.bottom_link:hover{ text-decoration: underline; }
  *                 Page Specific
  ***********************************************/
 /* Search Result page */
+#breadcrumb{ margin-top: 30px; }
+.search-result .tab-right-menu{ text-align: right; }
 .search-result #searchbar .search-key{ width: 393px;}
 .search-result #searchbar{
     width: 720px;
