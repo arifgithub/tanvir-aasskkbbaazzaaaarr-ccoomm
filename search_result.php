@@ -27,15 +27,17 @@
         </ul>
         <div class="free-offer"><a href="#" class="blue_text12_BOLD">ADVANCE SEARCH</a></div>
         <div id="searchbar">
-            <ul>
-                <li><input class="search-key" type="text" size="40" value="Select Products" name="textfield" /></li>
-                <li>
-                    <select name="select" class="search-location">
-                        <option>Select Location</option>
-                    </select>
-                </li>
-                <li><input type="submit" value="Search" name="Submit" class="btn-submit" /></li>
-            </ul>
+            <form id="form1" name="form1" method="post" action="">
+                <ul>
+                    <li><input class="search-key" type="text" size="40" value="Select Products" name="txtKey" /></li>
+                    <li>
+                        <select name="select" class="search-location">
+                            <option>Select Location</option>
+                        </select>
+                    </li>
+                    <li><input type="submit" value="Search" name="Submit" class="btn-submit" /></li>
+                </ul>
+            </form>
         </div>
         <!-- /#searchbar -->
     </div>
@@ -173,21 +175,23 @@
             <!-- /#refine-search -->
 
             <div id="search-by-prod" class="corner bottom-space10">
-                <ul>
-                    <li class="left-top"></li>
-                    <li class="left"></li>
-                    <li class="right-top"></li>
-                    <li class="right"></li>
-                    <li class="title orange_text16_Bold">Search by Product ID</li>
-                </ul>
-                <div class="search-form blue-box black_text11_Bold">
-                    <label for="txtProductID">Product ID</label>
-                    <input type="text" size="15" value="Enter Product ID" class="ash_text11" name="txtProductID" />
-                    <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
-                        <input type="submit" value="Search" class="black_text11 bottom-space10 submit" name="Submit" /><br/>
-                        Any one product you can search <br/>by Product ID 
+                <form id="form2" name="form2" method="post" action="">
+                    <ul>
+                        <li class="left-top"></li>
+                        <li class="left"></li>
+                        <li class="right-top"></li>
+                        <li class="right"></li>
+                        <li class="title orange_text16_Bold">Search by Product ID</li>
+                    </ul>
+                    <div class="search-form blue-box black_text11_Bold">
+                        <label for="txtProductID">Product ID</label>
+                        <input type="text" size="15" value="Enter Product ID" class="ash_text11" name="txtProductID" />
+                        <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
+                            <input type="submit" value="Search" class="black_text11 bottom-space10 submit" name="Submit" /><br/>
+                            Any one product you can search <br/>by Product ID 
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- /#search-by-prod -->
         </div>
@@ -250,8 +254,86 @@
         
     </div>
     <!-- /#footer -->
-    
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    //-------------------------------------
+    var strPriority = new Array();
+    strPriority[1] = 'Hot Sell';
+    strPriority[2] = 'Store';
+    strPriority[3] = 'Top Sell';
+    strPriority[4] = 'Urgent Sell';
+    stringSellPriority = function(id){
+        return strPriority[id];
+    }
+    //-------------------------------------
+    itemHTML = function(data){
+        var HTML = '<div class="item">';
+        HTML += '   <ul class="item-topbar grey-box top-space10">';
+        HTML += '       <li class="left black_text11_Bold">'+data.company+' <span class="Aash_text12">( '+data.location+' )</span></li>';
+        HTML += '       <li class="right seller orange_text12_Bold">Seller</li>';
+        HTML += '       <li class="right seller-other-prod"><a href="#" class="orange_text12_Bold">Seller others Product</a></li>';
+        HTML += '   </ul>';
+        HTML += '   <div class="item-body">';
+        HTML += '       <div class="col-left-1">';
+        HTML += '           <img border="0" width="100" height="90" src="'+data.image+'" /><br/>';
+        HTML += '           <strong class="black_text11">'+data.product_auto_id+'</strong>';
+        HTML += '       </div>';
+        HTML += '       <div class="col-left-2">';
+        HTML += '           <a class="search_title_link12" target="_blank" href="#">'+data.title+'</a>';
+        HTML += '           <div class="model black_text12 top-bottom-space5">'+data.model+'</div>';
+        HTML += '           <div class="black_text12 bottom-space10">';
+        HTML +=                 data.comment;
+        HTML += '           </div>';
+        HTML += '           <a class="purple_text12" href="#">Add To Favorite</a>';
+        HTML += '       </div>';
+        HTML += '       <div class="col-right top-space5">';
+        HTML += '           <div class="ash_text11"><strong>Payment:</strong> '+data.payment+'</div>';
+        HTML += '           <div class="ash_text11"><strong>Mini Order:</strong> '+data.mini_order+'</div>';
+        HTML += '           <div class="ash_text11"><strong>Quantity Available:</strong> '+data.quantity_available+'</div>';
+        HTML += '           <div><strong class="orange_text14">Price:</strong> <strong class="black_text11">'+data.price+'</strong></div>';
+        HTML += '           <div>';
+        HTML += '               <strong class="green_text11_Bold right-space40">Verified</strong>';
+        HTML += '               <img width="16" height="13" align="absmiddle" src="images/theme/company_icon.jpg" />';
+        HTML += '               <span class="orange_text11_Bold">'+data.verified+'</span>';
+        HTML += '           </div>';
+        HTML += '           <div>';
+        HTML += '               <strong class="red_text12_Bold right-space40">'+stringSellPriority(data.priority)+' </strong>';
+        HTML += '               <a target="_blank" href="#"><img align="absmiddle" border="0" width="103" height="25" src="images/theme/contact_now.jpg" /></a>';
+        HTML += '           </div>';
+        HTML += '       </div>';
+        HTML += '   </div>';
+        HTML += '   </div>';
+        
+        return HTML;
+    }
+    //-------------------------------------
+    var items = '';
+    $('#form1').submit(function(){
+        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
+        
+        $.ajax({
+			type: "POST",
+			url: url+'?action=keyword-search',
+			data: $("#form1").serialize(),
+			dataType: 'text',
+			cache: false,
+			complete: function(data){
+                items = jQuery.parseJSON(data.responseText);
+                //console.log(items);
+                $.each(items.items, function(i,item){
+    				$('.result-item-list').html( itemHTML(item) );
+                });
+			}
+		});
+        
+        return false;
+    });
+    //-------------------------------------
+});
+</script>
+
 </body>
 
 </html>

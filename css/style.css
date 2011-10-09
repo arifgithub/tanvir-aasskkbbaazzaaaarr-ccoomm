@@ -530,7 +530,8 @@ a.bottom_link:hover{ text-decoration: underline; }
  *                 Page Specific
  ***********************************************/
 /* Search Result page */
-#breadcrumb{ margin-top: 30px; }
+#breadcrumb{ margin-top: 30px; margin-bottom: 15px;}
+#breadcrumb a img{ margin-bottom: -5px; }
 .search-result .tab-right-menu{ text-align: right; }
 .search-result #searchbar .search-key{ width: 393px;}
 .search-result #searchbar{
