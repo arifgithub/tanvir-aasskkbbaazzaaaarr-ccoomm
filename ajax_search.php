@@ -17,7 +17,8 @@ class askBazaar{
         return $ok;
     }
 }
-askBazaar::db_connect();
+$ask = new askBazaar();
+$ask->db_connect();
 //----------------------------------------
 
 //----------------------------------------
@@ -26,12 +27,13 @@ switch($_GET['action']){
         $sql = "SELECT * FROM tbl_product p
                 LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
                 LEFT JOIN product_image pi ON pi.product_id=p.product_id
-                LEFT JOIN main_categories mc ON m.id=p.main_category_id
+                LEFT JOIN main_categories mc ON mc.id=p.main_category_id
                 LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms";
         if($_POST['txtKey']!=""){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
         $res = mysql_query($sql);
+        //var_dump($sql);
         break;
     
     case 'search-by-id':
@@ -43,7 +45,7 @@ switch($_GET['action']){
 $json = '{ "items" : [';
 while($row = mysql_fetch_assoc($res)){
     $json .= '{
-    
+
         "product_id" : "'.$row['product_id'].'",
         "product_auto_id" : "'.$row['product_auto_id'].'",
         "company" : "Rimixdot ltd",
@@ -51,7 +53,7 @@ while($row = mysql_fetch_assoc($res)){
         "title" : "'.$row['product_name'].'",
         "model" : "'.addslashes($row['product_brand_model_name']).'",
         "image" : "'.$row['product_image'].'",
-        "comment" : "'.$row['product_summary'].'",
+        "comment" : "'.addslashes(str_replace("\n","<br>",$row['product_summary'])).'",
         "payment" : "'.$row['payment_terms'].'",
         "mini_order" : "10 Pcs",
         "quantity_available" : "100 Pcs",
@@ -66,9 +68,10 @@ while($row = mysql_fetch_assoc($res)){
         "is_buyer" : false,
         "is_top_sell" : true,
         "is_urgent_sell" : false
-    
-    }';
-}        
+
+    },'."\n";
+}
+$json = rtrim($json, ",\n");
 $json .= '    ] }';
 
 echo $json;

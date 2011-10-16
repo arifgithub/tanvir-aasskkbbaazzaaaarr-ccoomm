@@ -29,7 +29,7 @@
         <div id="searchbar">
             <form id="form1" name="form1" method="post" action="">
                 <ul>
-                    <li><input class="search-key" type="text" size="40" value="Select Products" name="txtKey" /></li>
+                    <li><input id="search-key" class="search-key" type="text" size="40" value="Select Products" name="txtKey" /></li>
                     <li>
                         <select name="select" class="search-location">
                             <option>Select Location</option>
@@ -259,6 +259,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
     //-------------------------------------
+    var initVal = keyVal = $('#search-key').val();
+    $('#search-key').focus(function(){
+        $(this).val( (initVal==keyVal) ? '' : keyVal );
+    })
+    $('#search-key').blur(function(){
+        keyVal = $(this).val();
+        $(this).val( ($(this).val()=='') ? initVal : keyVal );
+    })
+    //-------------------------------------
     var strPriority = new Array();
     strPriority[1] = 'Hot Sell';
     strPriority[2] = 'Store';
@@ -304,7 +313,8 @@ $(document).ready(function(){
         HTML += '           </div>';
         HTML += '       </div>';
         HTML += '   </div>';
-        HTML += '   </div>';
+        HTML += '   </div>'
+        HTML += '   <br class="clear">';
         
         return HTML;
     }
@@ -321,10 +331,18 @@ $(document).ready(function(){
 			cache: false,
 			complete: function(data){
                 items = jQuery.parseJSON(data.responseText);
+                $('.result-item-list').html('');
+                //alert(items.items[0].image);
                 //console.log(items);
-                $.each(items.items, function(i,item){
-    				$('.result-item-list').html( itemHTML(item) );
-                });
+                //alert(items.items.length);
+                if(items.items.length > 0){
+                    $.each(items.items, function(i,item){
+                        //alert(item);
+                        $('.result-item-list').append( itemHTML(item) );
+                    });
+                }else{
+                    $('.result-item-list').append( '<div class="item">no such product found!</div>' );
+                }
 			}
 		});
         
