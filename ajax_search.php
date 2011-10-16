@@ -44,6 +44,8 @@ switch($_GET['action']){
 //----------------------------------------
 $json = '{ "items" : [';
 while($row = mysql_fetch_assoc($res)){
+    
+    for($i=0; $i<=10; $i++){ // Temporarily used this loop to increase row for pagination
     $json .= '{
 
         "product_id" : "'.$row['product_id'].'",
@@ -70,6 +72,8 @@ while($row = mysql_fetch_assoc($res)){
         "is_urgent_sell" : false
 
     },'."\n";
+    }
+    
 }
 $json = rtrim($json, ",\n");
 $json .= '    ] }';
