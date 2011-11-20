@@ -1,5 +1,21 @@
 <?php
 //----------------------------------------
+if (!function_exists('printr')) {
+
+    function printr($array, $return=false) {
+        $str = "<pre>";
+        $str .= print_r($array, true);
+        $str .= "</pre>";
+
+        if ($return) {
+            return $str;
+        } else {
+            echo $str;
+        }
+    }
+
+}
+//----------------------------------------
 class askBazaar{
 
     var $db_host = 'localhost';
@@ -24,14 +40,26 @@ $ask->db_connect();
 //----------------------------------------
 switch($_GET['action']){
     case 'keyword-search':
-        $sql = "SELECT * FROM tbl_product p
-                LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
-                LEFT JOIN product_image pi ON pi.product_id=p.product_id
-                LEFT JOIN main_categories mc ON mc.id=p.main_category_id
-                LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms";
+        $sql = "SELECT
+                    p.product_id, p.product_auto_id, p.product_delivery_place,
+                    p.product_name, p.product_brand_model_name, p.product_minimum_order,
+                    p.product_quantity_available, p.product_price,
+                    pi.product_image_name,
+                    pt.payment_terms,
+                    mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
+                    mr.member_email, mr.member_companyname,
+                    at.account_type
+                FROM tbl_product p
+                    LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
+                    LEFT JOIN product_image pi ON pi.product_id=p.product_id
+                    LEFT JOIN main_categories mc ON mc.id=p.main_category_id
+                    LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms
+                    LEFT JOIN tbl_member_reg mr ON mr.member_id=p.member_id
+                    LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type";
         if($_POST['txtKey']!=""){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
+        $sql .= " GROUP BY p.product_id";
         $res = mysql_query($sql);
         //var_dump($sql);
         break;
@@ -44,35 +72,35 @@ switch($_GET['action']){
 //----------------------------------------
 $json = '{ "items" : [';
 while($row = mysql_fetch_assoc($res)){
-    
-    for($i=0; $i<=10; $i++){ // Temporarily used this loop to increase row for pagination
+    //printr($row);continue;
+    //for($i=0; $i<=10; $i++){ // Temporarily used this loop to increase row for pagination
     $json .= '{
 
         "product_id" : "'.$row['product_id'].'",
-        "product_auto_id" : "'.$row['product_auto_id'].'",
-        "company" : "Rimixdot ltd",
-        "location" : "'.$row['product_delivery_place'].'",
-        "title" : "'.$row['product_name'].'",
+        "product_auto_id" : "'.addslashes($row['product_auto_id']).'",
+        "company" : "'.addslashes($row['member_companyname']).'",
+        "location" : "'.addslashes($row['product_delivery_place']).'",
+        "title" : "'.addslashes($row['product_name']).'",
         "model" : "'.addslashes($row['product_brand_model_name']).'",
-        "image" : "'.$row['product_image'].'",
+        "image" : "'.addslashes($row['product_image_name']).'",
         "comment" : "'.addslashes(str_replace("\n","<br>",$row['product_summary'])).'",
-        "payment" : "'.$row['payment_terms'].'",
-        "mini_order" : "10 Pcs",
-        "quantity_available" : "100 Pcs",
-        "price" : "100 Taka",
+        "payment" : "'.addslashes($row['payment_terms']).'",
+        "mini_order" : "'.addslashes($row['product_minimum_order']).'",
+        "quantity_available" : "'.addslashes($row['product_quantity_available']).'",
+        "price" : "'.addslashes($row['product_price']).'",
         "verified" : "Company Ad",
-        "seller_id" : "1",
+        "member_id" : "'.$row['member_id'].'",
         "priority" : "1",
-
-        "is_company" : true,
+        "is_company" : '.($row['member_type']=='Private'?'false':'true').',
         "is_private" : false,
-        "is_seller" : true,
-        "is_buyer" : false,
+        "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',
+        "is_buyer" : '.($row['account_type']!='Buyer'?'false':'true').',
+        "is_seller_buyer" : '.($row['account_type']!='Both'?'false':'true').',
         "is_top_sell" : true,
         "is_urgent_sell" : false
 
     },'."\n";
-    }
+    //}
     
 }
 $json = rtrim($json, ",\n");

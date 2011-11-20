@@ -278,6 +278,7 @@ $(document).ready(function(){
     }
     //-------------------------------------
     itemHTML = function(data){
+        //alert(data.image);
         var HTML = '<div class="item">';
         HTML += '   <ul class="item-topbar grey-box top-space10">';
         HTML += '       <li class="left black_text11_Bold">'+data.company+' <span class="Aash_text12">( '+data.location+' )</span></li>';
@@ -286,7 +287,7 @@ $(document).ready(function(){
         HTML += '   </ul>';
         HTML += '   <div class="item-body">';
         HTML += '       <div class="col-left-1">';
-        HTML += '           <img border="0" width="100" height="90" src="'+data.image+'" /><br/>';
+        HTML += '           <img border="0" width="100" height="90" src="./uploadedfiles/'+data.image+'" /><br/>';
         HTML += '           <strong class="black_text11">'+data.product_auto_id+'</strong>';
         HTML += '       </div>';
         HTML += '       <div class="col-left-2">';
@@ -319,7 +320,7 @@ $(document).ready(function(){
         return HTML;
     }
     //-------------------------------------
-    var items = '';
+    var product = '';
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -330,13 +331,14 @@ $(document).ready(function(){
 			dataType: 'text',
 			cache: false,
 			complete: function(data){
-                items = jQuery.parseJSON(data.responseText);
+                //alert(data);
+                product = jQuery.parseJSON(data.responseText);
                 $('.result-item-list').html('');
-                //alert(items.items[0].image);
-                //console.log(items);
-                //alert(items.items.length);
-                if(items.items.length > 0){
-                    $.each(items.items, function(i,item){
+                //alert(product.items[0].image);
+                //console.log(product);
+                alert(product.items.length);
+                if(product.items.length > 0){
+                    $.each(product.items, function(i,item){
                         //alert(item);
                         $('.result-item-list').append( itemHTML(item) );
                     });
@@ -347,6 +349,13 @@ $(document).ready(function(){
 		});
         
         return false;
+    });
+    
+    $('#form1').submit(function(){
+        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
+        $.get(url, function(data) {
+            //alert(data);
+        });
     });
     //-------------------------------------
     
