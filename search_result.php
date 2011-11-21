@@ -288,6 +288,7 @@ $(document).ready(function(){
     }
     pagination = function(curr, total){
         total = total-(total%1);
+        //alert(curr+' : '+total);
         var half = (pageLimit/2)-((pageLimit/2)%1);
         var start = (curr-half)<1 ? 1 : (curr-half);
         var limit = (curr+half)>total ? total : (start+pageLimit)-1;
@@ -297,7 +298,7 @@ $(document).ready(function(){
             if(i==curr){
                 HTML += '<li class="current no-link">'+i+'</li>';
             }else{
-                HTML += '<li>'+i+'</li>';
+                HTML += '<li class="page">'+i+'</li>';
             }
         }
         HTML += '<li class="next'+((curr==limit)?' no-link':'')+'">Next &gt;&gt;</li>'
@@ -402,6 +403,11 @@ $(document).ready(function(){
     });
     $('ul#pagination li.prev').live('click', function(){
         currentPage--;
+        getItemList();
+    });
+    $('ul#pagination li.page').live('click', function(){
+        currentPage = parseInt($(this).html());
+        //alert(currentPage);
         getItemList();
     });
     getItemList = function(){
