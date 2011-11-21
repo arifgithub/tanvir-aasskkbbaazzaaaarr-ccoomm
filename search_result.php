@@ -284,8 +284,9 @@ $(document).ready(function(){
     }
     //-------------------------------------
     pagination = function(curr, total){
-        var start = (curr-2)<1 ? 1 : (curr-2);
-        var limit = (curr+2)>total ? total : (start+pageLimit)-1;
+        var half = Math.round(pageLimit/2)-1;
+        var start = (curr-half)<1 ? 1 : (curr-half);
+        var limit = (curr+half)>total ? total : (start+pageLimit)-1;
         var HTML = '<ul id="pagination">'
         +'<li class="prev">&lt;&lt; Prev</li>';
         for(i=start; i<=limit; i++){
@@ -348,7 +349,7 @@ $(document).ready(function(){
     var productRefined = [];
     var currentPage = 1;
     var pageItemLimit = 10;
-    var pageLimit = 5;
+    var pageLimit = 7;
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
