@@ -292,6 +292,7 @@ $(document).ready(function(){
         var half = (pageLimit/2)-((pageLimit/2)%1);
         var start = (curr-half)<1 ? 1 : (curr-half);
         var limit = (curr+half)>total ? total : (start+pageLimit)-1;
+        start = (total-half<=curr) ? total-pageLimit : start;
         var HTML = '<ul id="pagination">'
         +'<li class="prev'+((curr==1)?' no-link':'')+'">&lt;&lt; Prev</li>';
         for(i=start; i<=limit; i++){
