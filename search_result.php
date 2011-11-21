@@ -368,6 +368,7 @@ $(document).ready(function(){
 			complete: function(data){
                 //alert(data);
                 product = jQuery.parseJSON(data.responseText);
+                //alert(product);
                 $('.result-item-list').html('');
                 //alert(product.items[0].image);
                 //console.log(product);
@@ -390,12 +391,12 @@ $(document).ready(function(){
         return false;
     });
     
-    $('#form1').submit(function(){
-        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
-        $.get(url, function(data) {
-            //alert(data);
-        });
-    });
+    //$('#form1').submit(function(){
+    //    var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
+    //    $.get(url, function(data) {
+    //        //alert(data);
+    //    });
+    //});
     
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){
