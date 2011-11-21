@@ -580,5 +580,7 @@ ul#pagination li{
     font-weight: bold;
     font-size: 14px;
 }
-ul#pagination li.current{ color: #FF0000; }
+ul#pagination li.prev{ margin-right: 15px; }
+ul#pagination li.next{ margin-left: 15px; }
+ul#pagination li.current{ background-color: #B20505; color: #fff; }
 ul#pagination li.no-link{ cursor: default; }
