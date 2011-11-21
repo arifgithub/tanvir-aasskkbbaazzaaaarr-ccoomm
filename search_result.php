@@ -283,20 +283,24 @@ $(document).ready(function(){
         return strPriority[id];
     }
     //-------------------------------------
+    function isInt(n) {
+        return n % 1 == 0;
+    }
     pagination = function(curr, total){
-        var half = Math.round(pageLimit/2)-1;
+        total = total-(total%1);
+        var half = (pageLimit/2)-((pageLimit/2)%1);
         var start = (curr-half)<1 ? 1 : (curr-half);
         var limit = (curr+half)>total ? total : (start+pageLimit)-1;
         var HTML = '<ul id="pagination">'
-        +'<li class="prev">&lt;&lt; Prev</li>';
+        +'<li class="prev'+((curr==1)?' no-link':'')+'">&lt;&lt; Prev</li>';
         for(i=start; i<=limit; i++){
             if(i==curr){
-                HTML += '<li class="current">'+i+'</li>';
+                HTML += '<li class="current no-link">'+i+'</li>';
             }else{
                 HTML += '<li>'+i+'</li>';
             }
         }
-        HTML += '<li class="next">Next &gt;&gt;</li>'
+        HTML += '<li class="next'+((curr==limit)?' no-link':'')+'">Next &gt;&gt;</li>'
         +'</ul>';
 
         return HTML;

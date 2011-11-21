@@ -581,3 +581,4 @@ ul#pagination li{
     font-size: 14px;
 }
 ul#pagination li.current{ color: #FF0000; }
+ul#pagination li.no-link{ cursor: default; }
