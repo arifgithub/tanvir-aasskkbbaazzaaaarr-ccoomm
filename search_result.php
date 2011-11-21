@@ -394,16 +394,24 @@ $(document).ready(function(){
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){
         currentPage++;
+        getItemList();
+    });
+    $('ul#pagination li.prev').live('click', function(){
+        currentPage--;
+        getItemList();
+    });
+    getItemList = function(){
         $('.result-item-list').html('');
-        var start = currentPage * pageLimit;
-        var limit = (pageLimit*currentPage) + pageLimit;
+        var start = (currentPage * pageItemLimit) - pageItemLimit;
+        var limit = (currentPage * pageItemLimit);
+        //alert(currentPage+' > '+start+' : '+limit);
         
         $.each(productRefined.slice(start, limit), function(i,item){
             //alert(item);
             $('.result-item-list').append( itemHTML(item) );
         });
         $('.result-item-list').append( pagination(currentPage, (productRefined.length/pageItemLimit)) );
-    });
+    }
     //-------------------------------------
 });
 </script>
