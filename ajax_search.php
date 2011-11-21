@@ -77,7 +77,9 @@ while($row = mysql_fetch_assoc($res)){
     $json .= '{
 
         "product_id" : "'.$row['product_id'].'",
-        "product_auto_id" : "'.addslashes($row['product_auto_id']).'",
+        "product_auto_id" : "'.addslashes($row['product_auto_id']).'",'
+        /* product_type => Hot Sell(1), Store(2), Top Sell(3), Urgent Sell(4), Recent Sell(5), Featured(0) */
+        .'"product_type" : "'.$row['product_type'].'",
         "company" : "'.addslashes($row['member_companyname']).'",
         "location" : "'.addslashes($row['product_delivery_place']).'",
         "title" : "'.addslashes($row['product_name']).'",

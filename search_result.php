@@ -139,6 +139,12 @@
                 <br class="clear"/>
                 <?php endfor; ?>
                 <!-- /.item -->
+                <!--<ul id="pagination">
+                    <li class="prev">&lt;&lt; Prev</li>
+                    <li class="current"></li>
+                    <li class="next">Next &gt;&gt;</li>
+                </ul>-->
+                <!-- /#pagination -->
             </div>
             <!-- /.result-prod-list -->
         </div>
@@ -277,6 +283,24 @@ $(document).ready(function(){
         return strPriority[id];
     }
     //-------------------------------------
+    pagination = function(curr, total){
+        var start = (curr-2)<1 ? 1 : (curr-2);
+        var limit = (curr+2)>total ? total : (start+pageLimit)-1;
+        var HTML = '<ul id="pagination">'
+        +'<li class="prev">&lt;&lt; Prev</li>';
+        for(i=start; i<=limit; i++){
+            if(i==curr){
+                HTML += '<li class="current">'+i+'</li>';
+            }else{
+                HTML += '<li>'+i+'</li>';
+            }
+        }
+        HTML += '<li class="next">Next &gt;&gt;</li>'
+        +'</ul>';
+
+        return HTML;
+    }
+    //-------------------------------------
     itemHTML = function(data){
         //alert(data.image);
         var HTML = '<div class="item">';
@@ -296,7 +320,7 @@ $(document).ready(function(){
         HTML += '           <div class="black_text12 bottom-space10">';
         HTML +=                 data.comment;
         HTML += '           </div>';
-        HTML += '           <a class="purple_text12" href="#">Add To Favorite</a>';
+        HTML += '           <a class="purple_text12" href="#'+data.product_id+'">Add To Favorite</a>';
         HTML += '       </div>';
         HTML += '       <div class="col-right top-space5">';
         HTML += '           <div class="ash_text11"><strong>Payment:</strong> '+data.payment+'</div>';
@@ -320,7 +344,11 @@ $(document).ready(function(){
         return HTML;
     }
     //-------------------------------------
-    var product = '';
+    var product = [];
+    var productRefined = [];
+    var currentPage = 1;
+    var pageItemLimit = 10;
+    var pageLimit = 5;
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -336,12 +364,16 @@ $(document).ready(function(){
                 $('.result-item-list').html('');
                 //alert(product.items[0].image);
                 //console.log(product);
-                alert(product.items.length);
+                //alert(product.items.length);
                 if(product.items.length > 0){
                     $.each(product.items, function(i,item){
+                        productRefined.push(item);
+                    });
+                    $.each(productRefined.slice(0, pageItemLimit), function(i,item){
                         //alert(item);
                         $('.result-item-list').append( itemHTML(item) );
                     });
+                    $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
                 }else{
                     $('.result-item-list').append( '<div class="item">no such product found!</div>' );
                 }
@@ -357,8 +389,20 @@ $(document).ready(function(){
             //alert(data);
         });
     });
-    //-------------------------------------
     
+    //-------------------------------------
+    $('ul#pagination li.next').live('click', function(){
+        currentPage++;
+        $('.result-item-list').html('');
+        var start = currentPage * pageLimit;
+        var limit = (pageLimit*currentPage) + pageLimit;
+        
+        $.each(productRefined.slice(start, limit), function(i,item){
+            //alert(item);
+            $('.result-item-list').append( itemHTML(item) );
+        });
+        $('.result-item-list').append( pagination(currentPage, (productRefined.length/pageItemLimit)) );
+    });
     //-------------------------------------
 });
 </script>

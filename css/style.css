@@ -564,3 +564,20 @@ a.bottom_link:hover{ text-decoration: underline; }
 #search-by-prod .search-form label{ width: 65px; }
 #search-by-prod .search-form input{ width: 120px; }
 #search-by-prod .search-form .submit{ margin-left: 30px; width: 90px; }
+/************************************************
+ *                 Pagination
+ ***********************************************/
+ul#pagination, ul#pagination li{ list-style: none; text-align: center; }
+ul#pagination li{
+    color: #7030A0;
+    display: inline-block;
+    margin: 0 3px;
+    padding: 3px 8px;
+    background-color: #C4E0ED;
+    cursor: pointer;
+    border: 1px solid #9AAEB7;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+}
+ul#pagination li.current{ color: #FF0000; }
