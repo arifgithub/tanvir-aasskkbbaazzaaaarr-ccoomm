@@ -87,7 +87,7 @@ while($row = mysql_fetch_assoc($res)){
         .'"product_type" : "'.$row['product_type'].'",
         "company" : "'.addslashes($row['member_companyname']).'",
         "location" : "'.addslashes($row['product_delivery_place']).'",
-        "title" : "'.base64_encode($row['product_name']).'",
+        "title" : "'.addslashes(base64_encode($row['product_name'])).'",
         "model" : "'.addslashes($row['product_brand_model_name']).'",
         "image" : "'.addslashes($row['product_image_name']).'",
         "comment" : "'.addslashes(str_replace("\n","<br>",$row['product_summary'])).'",
