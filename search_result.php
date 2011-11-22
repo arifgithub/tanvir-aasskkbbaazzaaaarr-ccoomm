@@ -66,7 +66,7 @@
                     <li class="left"></li>
                     <li class="right-top"></li>
                     <li class="right"></li>
-                    <li class="link"><a href="javascript:void(0);" class="orange_link12">Company</a></li>
+                    <li class="link"><a id="button-company" href="javascript:void(0);" class="orange_link12">Company</a></li>
                 </ul>
             </div>
             <div class="tab corner">
@@ -75,7 +75,7 @@
                     <li class="left"></li>
                     <li class="right-top"></li>
                     <li class="right"></li>
-                    <li class="link"><a href="javascript:void(0);" class="orange_link12">Private</a></li>
+                    <li class="link"><a id="button-private" href="javascript:void(0);" class="orange_link12">Private</a></li>
                 </ul>
             </div>
             <!-- /.tab -->
@@ -292,7 +292,7 @@ $(document).ready(function(){
     })
     //-------------------------------------
     var strProdType = new Array();
-    strProdType[0] = 'Featured Product';
+    strProdType[0] = 'Featured';// - Featured Product
     strProdType[1] = 'Hot Sell';
     strProdType[2] = 'Store';
     strProdType[3] = 'Top Sell';
@@ -409,10 +409,10 @@ $(document).ready(function(){
                     //});
                     productRefined = product.items;
                     //alert(productRefined);
-                    $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+                    $.each(product.items.slice(0, pageItemLimit), function(i,item){
                         $('.result-item-list').append( itemHTML(item) );
                     });
-                    totalPage = getTotalPage(productRefined.length/pageItemLimit);
+                    totalPage = getTotalPage(product.items.length/pageItemLimit);
                     $('.result-item-list').append( pagination(1, totalPage) );
                 }else{
                     $('.result-item-list').append( '<div class="item">no such product found!</div>' );
@@ -429,6 +429,33 @@ $(document).ready(function(){
     //        alert(data);
     //    });
     //});
+    
+    getInitProduct = function(){
+        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
+        $.get(url, function(data) {
+            product = jQuery.parseJSON(data);
+            //alert(product);
+            $('.result-item-list').html('');
+            //alert(product.items[0].image);
+            //console.log(product);
+            //alert(product.items.length);
+            if(product.items.length > 0){
+                //$.each(product.items, function(i,item){
+                //    productRefined.push(item);
+                //});
+                productRefined = product.items;
+                //alert(productRefined);
+                $.each(product.items.slice(0, pageItemLimit), function(i,item){
+                    $('.result-item-list').append( itemHTML(item) );
+                });
+                totalPage = getTotalPage(product.items.length/pageItemLimit);
+                $('.result-item-list').append( pagination(1, totalPage) );
+            }else{
+                $('.result-item-list').append( '<div class="item">no such product found!</div>' );
+            }
+        });
+    }
+    getInitProduct();
     
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){
@@ -458,6 +485,41 @@ $(document).ready(function(){
         });
         $('.result-item-list').append( pagination(currentPage, (productRefined.length/pageItemLimit)) );
     }
+    //-------------------------------------
+    $('#button-company').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        $.each(product.items, function(i,item){
+            if(item.is_company==true){ tmp.push(item); }
+        });
+        if(tmp.length > 0){
+            productRefined = tmp;
+            $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+                $('.result-item-list').append( itemHTML(item) );
+            });
+            $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+        }else{
+            $('.result-item-list').append( '<div class="item">No company product found!</div>' );            
+        }
+        //alert(tmp.length);
+    });
+    $('#button-private').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        $.each(product.items, function(i,item){
+            if(item.is_company==false){ tmp.push(item); }
+        });
+        if(tmp.length > 0){
+            productRefined = tmp;
+            $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+                $('.result-item-list').append( itemHTML(item) );
+            });
+            $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+        }else{
+            $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+        }
+        //alert(tmp.length);
+    });
     //-------------------------------------
 });
 </script>
