@@ -287,12 +287,19 @@ $(document).ready(function(){
         return n % 1 == 0;
     }
     pagination = function(curr, total){
-        total = total-(total%1);
+        //alert(total);
+        total = total<1 ? Math.round(total) : total-(total%1);
         //alert(curr+' : '+total);
-        var half = (pageLimit/2)-((pageLimit/2)%1);
-        var start = (curr-half)<1 ? 1 : (curr-half);
-        var limit = (curr+half)>total ? total : (start+pageLimit)-1;
-        start = (total-half<=curr) ? total-pageLimit : start;
+        if(pageLimit<=total){
+            var half = (pageLimit/2)-((pageLimit/2)%1);
+            var start = (curr-half)<1 ? 1 : (curr-half);
+            start = (total-half<=curr) ? total-pageLimit : start;
+            var limit = (curr+half)>total ? total : (start+pageLimit)-1;
+        }else{
+            var start = 1;
+            var limit = total;
+        }
+        //alert(curr+' > start:'+start+' limit:'+limit+' total:'+total);
         var HTML = '<ul id="pagination">'
         +'<li class="prev'+((curr==1)?' no-link':'')+'">&lt;&lt; Prev</li>';
         for(i=start; i<=limit; i++){
@@ -374,9 +381,10 @@ $(document).ready(function(){
                 //console.log(product);
                 //alert(product.items.length);
                 if(product.items.length > 0){
-                    $.each(product.items, function(i,item){
-                        productRefined.push(item);
-                    });
+                    //$.each(product.items, function(i,item){
+                    //    productRefined.push(item);
+                    //});
+                    productRefined = product.items;
                     $.each(productRefined.slice(0, pageItemLimit), function(i,item){
                         //alert(item);
                         $('.result-item-list').append( itemHTML(item) );

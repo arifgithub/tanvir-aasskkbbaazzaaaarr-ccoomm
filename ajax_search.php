@@ -59,7 +59,8 @@ switch($_GET['action']){
         if($_POST['txtKey']!=""){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
-        $sql .= " GROUP BY p.product_id";
+        $sql .= " GROUP BY p.product_id
+                  ORDER BY p.product_id DESC";
         $res = mysql_query($sql);
         //var_dump($sql);
         break;
