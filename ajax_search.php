@@ -43,7 +43,7 @@ switch($_GET['action']){
         $sql = "SELECT
                     p.product_id, p.product_auto_id, p.product_delivery_place,
                     p.product_name, p.product_brand_model_name, p.product_minimum_order,
-                    p.product_quantity_available, p.product_price,
+                    p.product_quantity_available, p.product_price, p.product_type,
                     pi.product_image_name,
                     pt.payment_terms,
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
@@ -83,8 +83,8 @@ while($row = mysql_fetch_assoc($res)){
 
         "product_id" : "'.$row['product_id'].'",
         "product_auto_id" : "'.addslashes($row['product_auto_id']).'",'
-        /* product_type => Hot Sell(1), Store(2), Top Sell(3), Urgent Sell(4), Recent Sell(5), Featured(0) */
-        .'"product_type" : "'.$row['product_type'].'",
+        /* product_type => Hot Sell(1), Store(2), Top Sell(3), Urgent Sell(4), Recent Sell(5), Featured(0) */.'
+        "product_type" : "'.$row['product_type'].'",
         "company" : "'.addslashes($row['member_companyname']).'",
         "location" : "'.addslashes($row['product_delivery_place']).'",
         "title" : "'.addslashes(base64_encode($row['product_name'])).'",

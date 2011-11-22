@@ -291,13 +291,15 @@ $(document).ready(function(){
         $(this).val( ($(this).val()=='') ? initVal : keyVal );
     })
     //-------------------------------------
-    var strPriority = new Array();
-    strPriority[1] = 'Hot Sell';
-    strPriority[2] = 'Store';
-    strPriority[3] = 'Top Sell';
-    strPriority[4] = 'Urgent Sell';
-    stringSellPriority = function(id){
-        return strPriority[id];
+    var strProdType = new Array();
+    strProdType[0] = 'Featured Product';
+    strProdType[1] = 'Hot Sell';
+    strProdType[2] = 'Store';
+    strProdType[3] = 'Top Sell';
+    strProdType[4] = 'Urgent Sell';
+    strProdType[5] = 'Recent Sell';
+    stringProdType = function(id){
+        return strProdType[id] ? strProdType[id] : strProdType[0];
     }
     //-------------------------------------
     function isInt(n) {
@@ -367,7 +369,7 @@ $(document).ready(function(){
         HTML += '               <span class="orange_text11_Bold">'+data.verified+'</span>';
         HTML += '           </div>';
         HTML += '           <div>';
-        HTML += '               <strong class="red_text12_Bold right-space40">'+stringSellPriority(data.priority)+' </strong>';
+        HTML += '               <strong class="red_text12_Bold right-space40">'+stringProdType(data.product_type)+' </strong>';
         HTML += '               <a target="_blank" href="#"><img align="absmiddle" border="0" width="103" height="25" src="images/theme/contact_now.jpg" /></a>';
         HTML += '           </div>';
         HTML += '       </div>';
