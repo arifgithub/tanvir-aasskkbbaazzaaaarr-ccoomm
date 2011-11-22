@@ -56,7 +56,7 @@ switch($_GET['action']){
                     LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms
                     LEFT JOIN tbl_member_reg mr ON mr.member_id=p.member_id
                     LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type";
-        if($_POST['txtKey']!=""){
+        if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products"){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
         $sql .= " GROUP BY p.product_id
@@ -75,6 +75,10 @@ $json = '{ "items" : [';
 while($row = mysql_fetch_assoc($res)){
     //printr($row);continue;
     //for($i=0; $i<=10; $i++){ // Temporarily used this loop to increase row for pagination
+    
+    //addslashes( iconv('ASCII', 'UTF-6//IGNORE',$row['product_name']))
+    //addslashes( iconv('ASCII', 'ISO-8859-1//IGNORE',$row['product_name']))
+    //mb_detect_encoding($row['product_name']);
     $json .= '{
 
         "product_id" : "'.$row['product_id'].'",
@@ -83,7 +87,7 @@ while($row = mysql_fetch_assoc($res)){
         .'"product_type" : "'.$row['product_type'].'",
         "company" : "'.addslashes($row['member_companyname']).'",
         "location" : "'.addslashes($row['product_delivery_place']).'",
-        "title" : "'.addslashes($row['product_name']).'",
+        "title" : "'.base64_encode($row['product_name']).'",
         "model" : "'.addslashes($row['product_brand_model_name']).'",
         "image" : "'.addslashes($row['product_image_name']).'",
         "comment" : "'.addslashes(str_replace("\n","<br>",$row['product_summary'])).'",

@@ -263,6 +263,22 @@
 </div>
 
 <script type="text/javascript">
+function decode_base64(s) {
+    var e={},i,k,v=[],r='',w=String.fromCharCode;
+    var n=[[65,91],[97,123],[48,58],[47,48],[43,44]];
+    
+    for(z in n){for(i=n[z][0];i<n[z][1];i++){v.push(w(i));}}
+    for(i=0;i<64;i++){e[v[i]]=i;}
+    
+    for(i=0;i<s.length;i+=72){
+        var b=0,c,x,l=0,o=s.substring(i,i+72);
+        for(x=0;x<o.length;x++){
+            c=e[o.charAt(x)];b=(b<<6)+c;l+=6;
+            while(l>=8){r+=w((b>>>(l-=8))%256);}
+        }
+    }
+    return r;
+}
 $(document).ready(function(){
     //-------------------------------------
     var initVal = keyVal = $('#search-key').val();
@@ -332,7 +348,7 @@ $(document).ready(function(){
         HTML += '           <strong class="black_text11">'+data.product_auto_id+'</strong>';
         HTML += '       </div>';
         HTML += '       <div class="col-left-2">';
-        HTML += '           <a class="search_title_link12" target="_blank" href="#">'+data.title+'</a>';
+        HTML += '           <a class="search_title_link12" target="_blank" href="#">'+decode_base64(data.title)+'</a>';
         HTML += '           <div class="model black_text12 top-bottom-space5">'+data.model+'</div>';
         HTML += '           <div class="black_text12 bottom-space10">';
         HTML +=                 data.comment;
@@ -389,8 +405,8 @@ $(document).ready(function(){
                     //    productRefined.push(item);
                     //});
                     productRefined = product.items;
+                    //alert(productRefined);
                     $.each(productRefined.slice(0, pageItemLimit), function(i,item){
-                        //alert(item);
                         $('.result-item-list').append( itemHTML(item) );
                     });
                     totalPage = getTotalPage(productRefined.length/pageItemLimit);
@@ -407,7 +423,7 @@ $(document).ready(function(){
     //$('#form1').submit(function(){
     //    var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
     //    $.get(url, function(data) {
-    //        //alert(data);
+    //        alert(data);
     //    });
     //});
     
