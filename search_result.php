@@ -286,9 +286,12 @@ $(document).ready(function(){
     function isInt(n) {
         return n % 1 == 0;
     }
+    getTotalPage = function(total){
+        return total<1 ? 1 : (total-(total%1))+1;
+    }
     pagination = function(curr, total){
         //alert(total);
-        total = total<1 ? Math.round(total) : total-(total%1);
+        total = totalPage;
         //alert(curr+' : '+total);
         if(pageLimit<=total){
             var half = (pageLimit/2)-((pageLimit/2)%1);
@@ -363,6 +366,7 @@ $(document).ready(function(){
     var currentPage = 1;
     var pageItemLimit = 10;
     var pageLimit = 7;
+    var totalPage = 0;
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -389,7 +393,8 @@ $(document).ready(function(){
                         //alert(item);
                         $('.result-item-list').append( itemHTML(item) );
                     });
-                    $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+                    totalPage = getTotalPage(productRefined.length/pageItemLimit);
+                    $('.result-item-list').append( pagination(1, totalPage) );
                 }else{
                     $('.result-item-list').append( '<div class="item">no such product found!</div>' );
                 }
@@ -408,10 +413,12 @@ $(document).ready(function(){
     
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){
+        if($(this).hasClass('no-link')){ return false; }
         currentPage++;
         getItemList();
     });
     $('ul#pagination li.prev').live('click', function(){
+        if($(this).hasClass('no-link')){ return false; }
         currentPage--;
         getItemList();
     });
