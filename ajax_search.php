@@ -102,6 +102,7 @@ while($row = mysql_fetch_assoc($res)){
         "priority" : "1",
         "account_type" : "'.$row['account_type'].'",
         "product_condition" : "'.$row['product_condition'].'",
+        "member_type" : "'.$row['member_type'].'",
         "is_company" : '.($row['member_type']=='Private'?'false':'true').',
         "is_private" : false,
         "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',

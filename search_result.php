@@ -82,8 +82,8 @@
             
             <div class="tab-right-menu">
                 <span class="purple_text12">You can also view list of :</span>
-                <a class="orange_text16" href="#"><strong>Seller</strong></a> <span class="ash_text16_Bold"> | </span>
-                <a class="purple_text16_Bold" href="#"><strong>Buyer</strong></a>
+                <a id="btn-seller" class="orange_text16" href="javascript:void(0);"><strong>Seller</strong></a> <span class="ash_text16_Bold"> | </span>
+                <a id="btn-buyer" class="purple_text16_Bold" href="javascript:void(0);"><strong>Buyer</strong></a>
             </div>
             
             <div class="result-top-bar corner">
@@ -93,8 +93,8 @@
                     <li class="left"></li>
                     <li class="right-top"></li>
                     <li class="right"></li>
-                    <li class="top-sell"><a href="javascript:void(0);" class="red_text12_Bold">Urgent Sell</a></li>
-                    <li class="top-sell"><a href="javascript:void(0);" class="orange_text12_Bold">Top Sell</a></li>
+                    <li class="top-sell"><a id="btn-urgent-sell" href="javascript:void(0);" class="red_text12_Bold">Urgent Sell</a></li>
+                    <li class="top-sell"><a id="btn-top-sell" href="javascript:void(0);" class="orange_text12_Bold">Top Sell</a></li>
                 </ul>
             </div>
             <!-- /.result-top-bar -->
@@ -392,6 +392,7 @@ $(document).ready(function(){
     //-------------------------------------
     var product = [];
     var productRefined = [];
+    var productRefined_L2 = [];
     var currentPage = 1;
     var pageItemLimit = 10;
     var pageLimit = 7;
@@ -488,8 +489,14 @@ $(document).ready(function(){
         $('.result-item-list').html('');
         var start = (currentPage * pageItemLimit) - pageItemLimit;
         var limit = (currentPage * pageItemLimit);
+        var items = [];
         //alert(currentPage+' > '+start+' : '+limit);
         
+        if(productRefined_L2.length > 0){
+            items = productRefined_L2;
+        }else{
+            items = productRefined;
+        }
         $.each(productRefined.slice(start, limit), function(i,item){
             //alert(item);
             $('.result-item-list').append( itemHTML(item) );
@@ -498,6 +505,9 @@ $(document).ready(function(){
     }
     //-------------------------------------
     $('#button-company').click(function(){
+        //Reset 2rd Level Refine
+        productRefined_L2 = [];
+        //---------------------
         var tmp = [];
         clickedTab = 'Company';
         $('.result-item-list').html('');
@@ -516,6 +526,9 @@ $(document).ready(function(){
         //alert(tmp.length);
     });
     $('#button-private').click(function(){
+        //Reset 2rd Level Refine
+        productRefined_L2 = [];
+        //---------------------
         var tmp = [];
         clickedTab = 'Private';
         $('.result-item-list').html('');
@@ -533,6 +546,58 @@ $(document).ready(function(){
         }
         //alert(tmp.length);
     });
+    //-------------------------------------
+    //$('#btn-urgent-sell').click(function(){
+    //    var tmp = [];
+    //    $('.result-item-list').html('');
+    //    $.each(productRefined, function(i,item){
+    //        if(item.member_type==clickedTab && item.product_type==4){
+    //            tmp.push(item);
+    //        }
+    //    });
+    //    if(tmp.length > 0){
+    //        productRefined = tmp;
+    //        $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+    //            $('.result-item-list').append( itemHTML(item) );
+    //        });
+    //        $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+    //    }else{
+    //        $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+    //    }
+    //});
+    //-------------------------------------
+    $('#btn-seller').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        $.each(productRefined, function(i,item){
+            if(item.member_type==clickedTab && item.account_type=='Seller'){
+                tmp.push(item);
+            }
+        });
+        //alert(productRefined);
+        showSellerBuyerItems(tmp);
+    });
+    $('#btn-buyer').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        $.each(productRefined, function(i,item){
+            if(item.member_type==clickedTab && item.account_type=='Buyer'){
+                tmp.push(item);
+            }
+        });
+        showSellerBuyerItems(tmp);
+    });
+    showSellerBuyerItems = function(data){
+        if(data.length > 0){
+            productRefined_L2 = data;
+            $.each(productRefined_L2.slice(0, pageItemLimit), function(i,item){
+                $('.result-item-list').append( itemHTML(item) );
+            });
+            $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+        }else{
+            $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+        }
+    }
     //-------------------------------------
 });
 </script>
