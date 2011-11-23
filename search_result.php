@@ -304,12 +304,8 @@ $(document).ready(function(){
     stringProdType = function(id){
         return strProdType[id] ? strProdType[id] : strProdType[0];
     }
-    var strAccountType = new Array();
-    strAccountType[0] = 'Seller';
-    strAccountType[1] = 'Buyer';
-    strAccountType[2] = 'Seller/Buyer';
-    stringAccountType = function(id){
-        return strAccountType[id] ? strAccountType[id] : strAccountType[0];
+    stringAccountType = function(type){
+        return type=='Both' ? 'Seller/Buyer' : type;
     }
     //-------------------------------------
     function isInt(n) {
@@ -318,9 +314,13 @@ $(document).ready(function(){
     getTotalPage = function(total){
         return total<1 ? 1 : (total-(total%1))+1;
     }
+    function is_int(value){
+        return (parseFloat(value) == parseInt(value)) ? true : false;
+    }
     pagination = function(curr, total){
-        //alert(total);
-        total = totalPage;
+        if(!is_int(total+0)){
+            total = getTotalPage(total);
+        }
         //alert(curr+' : '+total);
         if(pageLimit<=total){
             var half = (pageLimit/2)-((pageLimit/2)%1);
@@ -497,11 +497,12 @@ $(document).ready(function(){
         }else{
             items = productRefined;
         }
-        $.each(productRefined.slice(start, limit), function(i,item){
+        $.each(items.slice(start, limit), function(i,item){
             //alert(item);
             $('.result-item-list').append( itemHTML(item) );
         });
-        $('.result-item-list').append( pagination(currentPage, (productRefined.length/pageItemLimit)) );
+        //alert(items.length);
+        $('.result-item-list').append( pagination(currentPage, (items.length/pageItemLimit)) );
     }
     //-------------------------------------
     $('#button-company').click(function(){
@@ -569,22 +570,39 @@ $(document).ready(function(){
     $('#btn-seller').click(function(){
         var tmp = [];
         $('.result-item-list').html('');
-        $.each(productRefined, function(i,item){
-            if(item.member_type==clickedTab && item.account_type=='Seller'){
+        if(clickedTab!=""){
+            $.each(productRefined, function(i,item){
+                if(item.member_type==clickedTab && (item.account_type=='Seller') ){
+                    tmp.push(item);
+                }
+            });
+        }else{
+            $.each(productRefined, function(i,item){
+            if(item.account_type=='Seller'){
                 tmp.push(item);
             }
         });
-        //alert(productRefined);
+        }
+        //alert(tmp);
         showSellerBuyerItems(tmp);
     });
     $('#btn-buyer').click(function(){
         var tmp = [];
         $('.result-item-list').html('');
-        $.each(productRefined, function(i,item){
-            if(item.member_type==clickedTab && item.account_type=='Buyer'){
+        if(clickedTab!=""){
+            $.each(productRefined, function(i,item){
+                if(item.member_type==clickedTab && (item.account_type=='Buyer') ){
+                    tmp.push(item);
+                }
+            });
+        }else{
+            $.each(productRefined, function(i,item){
+            if(item.account_type=='Buyer'){
                 tmp.push(item);
             }
         });
+        }
+        //alert(tmp);
         showSellerBuyerItems(tmp);
     });
     showSellerBuyerItems = function(data){
@@ -593,7 +611,7 @@ $(document).ready(function(){
             $.each(productRefined_L2.slice(0, pageItemLimit), function(i,item){
                 $('.result-item-list').append( itemHTML(item) );
             });
-            $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+            $('.result-item-list').append( pagination(1, (productRefined_L2.length/pageItemLimit)) );
         }else{
             $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
         }
