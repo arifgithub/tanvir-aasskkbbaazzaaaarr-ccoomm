@@ -108,8 +108,8 @@ while($row = mysql_fetch_assoc($res)){
         "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',
         "is_buyer" : '.($row['account_type']!='Buyer'?'false':'true').',
         "is_seller_buyer" : '.($row['account_type']!='Both'?'false':'true').',
-        "is_top_sell" : true,
-        "is_urgent_sell" : false
+        "is_top_sell" : '.($row['product_type']==3?'true':'false').',
+        "is_urgent_sell" : '.($row['product_type']==4?'true':'false').'
 
     },'."\n";
     //}

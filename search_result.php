@@ -321,6 +321,7 @@ $(document).ready(function(){
         if(!is_int(total+0)){
             total = getTotalPage(total);
         }
+        totalPage = total;
         //alert(curr+' : '+total);
         if(pageLimit<=total){
             var half = (pageLimit/2)-((pageLimit/2)%1);
@@ -393,6 +394,7 @@ $(document).ready(function(){
     var product = [];
     var productRefined = [];
     var productRefined_L2 = [];
+    var productRefined_L3 = [];
     var currentPage = 1;
     var pageItemLimit = 10;
     var pageLimit = 7;
@@ -492,7 +494,9 @@ $(document).ready(function(){
         var items = [];
         //alert(currentPage+' > '+start+' : '+limit);
         
-        if(productRefined_L2.length > 0){
+        if(productRefined_L3.length>0){
+            items = productRefined_L3;
+        }else if(productRefined_L2.length > 0){
             items = productRefined_L2;
         }else{
             items = productRefined;
@@ -506,7 +510,7 @@ $(document).ready(function(){
     }
     //-------------------------------------
     $('#button-company').click(function(){
-        //Reset 2rd Level Refine
+        //Reset 2nd Level Refine
         productRefined_L2 = [];
         //---------------------
         var tmp = [];
@@ -527,7 +531,7 @@ $(document).ready(function(){
         //alert(tmp.length);
     });
     $('#button-private').click(function(){
-        //Reset 2rd Level Refine
+        //Reset 2nd Level Refine
         productRefined_L2 = [];
         //---------------------
         var tmp = [];
@@ -548,26 +552,10 @@ $(document).ready(function(){
         //alert(tmp.length);
     });
     //-------------------------------------
-    //$('#btn-urgent-sell').click(function(){
-    //    var tmp = [];
-    //    $('.result-item-list').html('');
-    //    $.each(productRefined, function(i,item){
-    //        if(item.member_type==clickedTab && item.product_type==4){
-    //            tmp.push(item);
-    //        }
-    //    });
-    //    if(tmp.length > 0){
-    //        productRefined = tmp;
-    //        $.each(productRefined.slice(0, pageItemLimit), function(i,item){
-    //            $('.result-item-list').append( itemHTML(item) );
-    //        });
-    //        $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
-    //    }else{
-    //        $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
-    //    }
-    //});
-    //-------------------------------------
     $('#btn-seller').click(function(){
+        //Reset 3rd Level Refine
+        productRefined_L3 = [];
+        //---------------------
         var tmp = [];
         $('.result-item-list').html('');
         if(clickedTab!=""){
@@ -587,6 +575,9 @@ $(document).ready(function(){
         showSellerBuyerItems(tmp);
     });
     $('#btn-buyer').click(function(){
+        //Reset 3rd Level Refine
+        productRefined_L3 = [];
+        //---------------------
         var tmp = [];
         $('.result-item-list').html('');
         if(clickedTab!=""){
@@ -612,6 +603,56 @@ $(document).ready(function(){
                 $('.result-item-list').append( itemHTML(item) );
             });
             $('.result-item-list').append( pagination(1, (productRefined_L2.length/pageItemLimit)) );
+        }else{
+            $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+        }
+    }
+    //-------------------------------------
+    $('#btn-top-sell').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        if(productRefined_L2.length>0){
+            $.each(productRefined_L2, function(i,item){
+                if(item.is_top_sell==true){
+                    tmp.push(item);
+                }
+            });
+        }else{
+            $.each(productRefined, function(i,item){
+                if(item.is_top_sell==true){
+                    tmp.push(item);
+                }
+            });
+        }
+        showTypedItems(tmp);
+        //alert(totalPage);
+    });
+    $('#btn-urgent-sell').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        if(productRefined_L2.length>0){
+            $.each(productRefined_L2, function(i,item){
+                if(item.is_urgent_sell==true){
+                    tmp.push(item);
+                }
+            });
+        }else{
+            $.each(productRefined, function(i,item){
+                if(item.is_urgent_sell==true){
+                    tmp.push(item);
+                }
+            });
+        }
+        showTypedItems(tmp);
+        //alert(totalPage);
+    });
+    showTypedItems = function(data){
+        if(data.length > 0){
+            productRefined_L3 = data;
+            $.each(productRefined_L3.slice(0, pageItemLimit), function(i,item){
+                $('.result-item-list').append( itemHTML(item) );
+            });
+            $('.result-item-list').append( pagination(1, (productRefined_L3.length/pageItemLimit)) );
         }else{
             $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
         }
