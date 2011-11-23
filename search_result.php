@@ -163,15 +163,18 @@
                 <div class="search-form blue-box black_text11">
                     <label for="selPriceRange">Price Range</label>
                     <select class="ash_text11" name="selPriceRange">
-                        <option>Please Select</option>
+                        <option value="">Please Select</option>
                     </select><br/>
                     <label for="selItemCondition">Item Condition</label>
                     <select class="ash_text11" name="selItemCondition">
-                        <option>Please Select</option>
+                        <option value="">Please Select</option>
+                        <option value="">New</option>
+                        <option value="">Used</option>
+                        <option value="">Refabrished</option>
                     </select><br/>
                     <label for="selLocation">Location</label>
                     <select class="ash_text11" name="selLocation">
-                        <option>Please Select</option>
+                        <option value="">Please Select</option>
                     </select><br/>
                     <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
                         <input type="submit" value="Search" class="black_text11 bottom-space10" name="Submit" /><br/>
@@ -393,6 +396,7 @@ $(document).ready(function(){
     var pageItemLimit = 10;
     var pageLimit = 7;
     var totalPage = 0;
+    var clickedTab = "";
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -495,6 +499,7 @@ $(document).ready(function(){
     //-------------------------------------
     $('#button-company').click(function(){
         var tmp = [];
+        clickedTab = 'Company';
         $('.result-item-list').html('');
         $.each(product.items, function(i,item){
             if(item.is_company==true){ tmp.push(item); }
@@ -512,6 +517,7 @@ $(document).ready(function(){
     });
     $('#button-private').click(function(){
         var tmp = [];
+        clickedTab = 'Private';
         $('.result-item-list').html('');
         $.each(product.items, function(i,item){
             if(item.is_company==false){ tmp.push(item); }

@@ -48,14 +48,16 @@ switch($_GET['action']){
                     pt.payment_terms,
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
                     mr.member_email, mr.member_companyname,
-                    at.account_type
+                    at.account_type,
+                    pc.product_condition
                 FROM tbl_product p
                     LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
                     LEFT JOIN product_image pi ON pi.product_id=p.product_id
                     LEFT JOIN main_categories mc ON mc.id=p.main_category_id
                     LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms
                     LEFT JOIN tbl_member_reg mr ON mr.member_id=p.member_id
-                    LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type";
+                    LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type
+                    LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition";
         if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products"){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
@@ -99,6 +101,7 @@ while($row = mysql_fetch_assoc($res)){
         "member_id" : "'.$row['member_id'].'",
         "priority" : "1",
         "account_type" : "'.$row['account_type'].'",
+        "product_condition" : "'.$row['product_condition'].'",
         "is_company" : '.($row['member_type']=='Private'?'false':'true').',
         "is_private" : false,
         "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',
