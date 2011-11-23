@@ -49,7 +49,7 @@ switch($_GET['action']){
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
                     mr.member_email, mr.member_companyname,
                     at.account_type,
-                    pc.product_condition
+                    pcon.product_condition
                 FROM tbl_product p
                     LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
                     LEFT JOIN product_image pi ON pi.product_id=p.product_id
@@ -57,7 +57,7 @@ switch($_GET['action']){
                     LEFT JOIN tbl_payment_terms pt ON pt.id=p.product_payment_terms
                     LEFT JOIN tbl_member_reg mr ON mr.member_id=p.member_id
                     LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type
-                    LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition";
+                    LEFT JOIN tbl_product_condition pcon ON pcon.id=p.product_condition";
         if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products"){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
         }
