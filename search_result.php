@@ -301,6 +301,13 @@ $(document).ready(function(){
     stringProdType = function(id){
         return strProdType[id] ? strProdType[id] : strProdType[0];
     }
+    var strAccountType = new Array();
+    strAccountType[0] = 'Seller';
+    strAccountType[1] = 'Buyer';
+    strAccountType[2] = 'Seller/Buyer';
+    stringAccountType = function(id){
+        return strAccountType[id] ? strAccountType[id] : strAccountType[0];
+    }
     //-------------------------------------
     function isInt(n) {
         return n % 1 == 0;
@@ -342,8 +349,8 @@ $(document).ready(function(){
         var HTML = '<div class="item">';
         HTML += '   <ul class="item-topbar grey-box top-space10">';
         HTML += '       <li class="left black_text11_Bold">'+data.company+' <span class="Aash_text12">( '+data.location+' )</span></li>';
-        HTML += '       <li class="right seller orange_text12_Bold">Seller</li>';
-        HTML += '       <li class="right seller-other-prod"><a href="#" class="orange_text12_Bold">Seller others Product</a></li>';
+        HTML += '       <li class="right seller orange_text12_Bold">'+stringAccountType(data.account_type)+'</li>';
+        HTML += '       <li class="right seller-other-prod"><a href="#" class="orange_text12_Bold">'+stringAccountType(data.account_type)+' others Product</a></li>';
         HTML += '   </ul>';
         HTML += '   <div class="item-body">';
         HTML += '       <div class="col-left-1">';

@@ -98,6 +98,7 @@ while($row = mysql_fetch_assoc($res)){
         "verified" : "Company Ad",
         "member_id" : "'.$row['member_id'].'",
         "priority" : "1",
+        "account_type" : "'.$row['account_type'].'",
         "is_company" : '.($row['member_type']=='Private'?'false':'true').',
         "is_private" : false,
         "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',
