@@ -409,10 +409,6 @@ $(document).ready(function(){
     var pageLimit = 7;
     var totalPage = 0;
     var clickedTab = "";
-    $('#form2').submit(function(){
-        getInitProduct( 'product-id&id='+$('#key-product-id').val() );
-        return false;
-    });
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -450,12 +446,10 @@ $(document).ready(function(){
         return false;
     });
     
-    //$('#form1').submit(function(){
-    //    var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
-    //    $.get(url, function(data) {
-    //        alert(data);
-    //    });
-    //});
+    $('#form2').submit(function(){
+        getInitProduct( 'product-id&id='+$('#key-product-id').val() );
+        return false;
+    });
     
     getInitProduct = function( action ){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action='+action;
