@@ -19,9 +19,9 @@ if (!function_exists('printr')) {
 class askBazaar{
 
     var $db_host = 'localhost';
-    var $db_user = 'root';
-    var $db_pass = 'admin';
-    var $db_name = 'askbazaar';
+    var $db_user = 'askbazaa_askdb';
+    var $db_pass = 'arianwr0thy';
+    var $db_name = 'askbazaa_askdb';
 
     function __construct(){
         //
