@@ -195,7 +195,7 @@
                     </ul>
                     <div class="search-form blue-box black_text11_Bold">
                         <label for="txtProductID">Product ID</label>
-                        <input type="text" size="15" value="Enter Product ID" class="ash_text11" name="txtProductID" />
+                        <input type="text" size="15" value="Enter Product ID" class="ash_text11" id="key-product-id" name="txtProductID" />
                         <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
                             <input type="submit" value="Search" class="black_text11 bottom-space10 submit" name="Submit" /><br/>
                             Any one product you can search <br/>by Product ID 
@@ -292,6 +292,15 @@ $(document).ready(function(){
     $('#search-key').blur(function(){
         keyVal = $(this).val();
         $(this).val( ($(this).val()=='') ? initVal : keyVal );
+    })
+    //-------------------------------------
+    var initValProdID = keyVal = $('#key-product-id').val();
+    $('#key-product-id').focus(function(){
+        $(this).val( (initValProdID==keyVal) ? '' : keyVal );
+    })
+    $('#key-product-id').blur(function(){
+        keyVal = $(this).val();
+        $(this).val( ($(this).val()=='') ? initValProdID : keyVal );
     })
     //-------------------------------------
     var strProdType = new Array();
@@ -400,6 +409,10 @@ $(document).ready(function(){
     var pageLimit = 7;
     var totalPage = 0;
     var clickedTab = "";
+    $('#form2').submit(function(){
+        getInitProduct( 'product-id&id='+$('#key-product-id').val() );
+        return false;
+    });
     $('#form1').submit(function(){
         var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
         
@@ -444,8 +457,8 @@ $(document).ready(function(){
     //    });
     //});
     
-    getInitProduct = function(){
-        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action=keyword-search';
+    getInitProduct = function( action ){
+        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action='+action;
         $.get(url, function(data) {
             product = jQuery.parseJSON(data);
             //alert(product);
@@ -469,7 +482,7 @@ $(document).ready(function(){
             }
         });
     }
-    getInitProduct();
+    getInitProduct( 'keyword-search' );
     
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){

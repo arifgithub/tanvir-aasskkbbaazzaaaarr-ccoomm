@@ -40,6 +40,7 @@ $ask->db_connect();
 //----------------------------------------
 switch($_GET['action']){
     case 'keyword-search':
+    case 'product-id':
         $sql = "SELECT
                     p.product_id, p.product_auto_id, p.product_delivery_place,
                     p.product_name, p.product_brand_model_name, p.product_minimum_order,
@@ -58,8 +59,10 @@ switch($_GET['action']){
                     LEFT JOIN tbl_member_reg mr ON mr.member_id=p.member_id
                     LEFT JOIN tbl_account_type at ON at.id=mr.member_account_type
                     LEFT JOIN tbl_product_condition pcon ON pcon.id=p.product_condition";
-        if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products"){
+        if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products" && $_GET['action']=='keyword-search'){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
+        }else if($_GET['id']!="" && $_GET['id']!="Enter Product ID" && $_GET['action']=='product-id'){
+            $sql .= ' WHERE p.product_id="'.$_GET['id'].'"';
         }
         $sql .= " GROUP BY p.product_id
                   ORDER BY p.product_id DESC";
