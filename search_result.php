@@ -99,46 +99,10 @@
             </div>
             <!-- /.result-top-bar -->
             <div class="result-item-list">
-                <?php for($i=1; $i<=3; $i++): ?>
                 <div class="item">
-                    <ul class="item-topbar grey-box top-space10">
-                        <li class="left black_text11_Bold">Rimixdot ltd <span class="Aash_text12">( Dhaka )</span></li>
-                        <li class="right seller orange_text12_Bold">Seller</li>
-                        <li class="right seller-other-prod"><a href="#" class="orange_text12_Bold">Seller others Product</a></li>
-                    </ul>
-                    <div class="item-body">
-                        <div class="col-left-1">
-                            <img border="0" width="100" height="90" src="images/other/product1.jpg" /><br/>
-                            <strong class="black_text11">Product ID abcd234</strong>
-                        </div>
-                        <div class="col-left-2">
-                            <a class="search_title_link12" target="_blank" href="#">Apple iphone Mobile</a>
-                            <div class="model black_text12 top-bottom-space5">14.1" TFT LCD panel (1280*800 B141EW04 V5)</div>
-                            <div class="black_text12 bottom-space10">
-                                computer peripherals service computers peripherals dealers , cpu , hardwares
-                                keyboards c omputer peripherals service pro fajsdlfjas...
-                            </div>
-                            <a class="purple_text12" href="#">Add To Favorite</a>
-                        </div>
-                        <div class="col-right top-space5">
-                            <div class="ash_text11"><strong>Payment:</strong> Bank Payment</div>
-                            <div class="ash_text11"><strong>Mini Order:</strong> 10 Pcs</div>
-                            <div class="ash_text11"><strong>Quantity Available:</strong> 100 Pcs</div>
-                            <div><strong class="orange_text14">Price:</strong> <strong class="black_text11">100 Taka</strong></div>
-                            <div>
-                                <strong class="green_text11_Bold right-space40">Verified</strong>
-                                <img width="16" height="13" align="absmiddle" src="images/theme/company_icon.jpg" />
-                                <span class="orange_text11_Bold">Company Ad</span>
-                            </div>
-                            <div>
-                                <strong class="red_text12_Bold right-space40">Hot Sell </strong>
-                                <a target="_blank" href="#"><img align="absmiddle" border="0" width="103" height="25" src="images/theme/contact_now.jpg" /></a>
-                            </div>
-                        </div>
-                    </div>
+                    Loading ...
                 </div>
                 <br class="clear"/>
-                <?php endfor; ?>
                 <!-- /.item -->
                 <!--<ul id="pagination">
                     <li class="prev">&lt;&lt; Prev</li>
@@ -294,13 +258,13 @@ $(document).ready(function(){
         $(this).val( ($(this).val()=='') ? initVal : keyVal );
     })
     //-------------------------------------
-    var initValProdID = keyVal = $('#key-product-id').val();
+    var initValProdID = keyValID = $('#key-product-id').val();
     $('#key-product-id').focus(function(){
-        $(this).val( (initValProdID==keyVal) ? '' : keyVal );
+        $(this).val( (initValProdID==keyValID) ? '' : keyValID );
     })
     $('#key-product-id').blur(function(){
-        keyVal = $(this).val();
-        $(this).val( ($(this).val()=='') ? initValProdID : keyVal );
+        keyValID = $(this).val();
+        $(this).val( ($(this).val()=='') ? initValProdID : keyValID );
     })
     //-------------------------------------
     var strProdType = new Array();
@@ -410,7 +374,7 @@ $(document).ready(function(){
     var totalPage = 0;
     var clickedTab = "";
     $('#form1').submit(function(){
-        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php';
+        var url = './ajax_search.php';
         
         $.ajax({
 			type: "POST",
@@ -452,7 +416,7 @@ $(document).ready(function(){
     });
     
     getInitProduct = function( action ){
-        var url = 'http://<?=$_SERVER['HTTP_HOST'];?>/ajax_search.php?action='+action;
+        var url = './ajax_search.php?action='+action;
         $.get(url, function(data) {
             product = jQuery.parseJSON(data);
             //alert(product);
