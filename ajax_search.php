@@ -47,6 +47,7 @@ switch($_GET['action']){
                     p.product_quantity_available, p.product_price, p.product_type,
                     pi.product_image_name,
                     pt.payment_terms,
+                    mc.category,
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
                     mr.member_email, mr.member_companyname,
                     at.account_type,
@@ -61,6 +62,9 @@ switch($_GET['action']){
                     LEFT JOIN tbl_product_condition pcon ON pcon.id=p.product_condition";
         if($_POST['txtKey']!="" && $_POST['txtKey']!="Select Products" && $_GET['action']=='keyword-search'){
             $sql .= ' WHERE p.product_name LIKE "%'.$_POST['txtKey'].'%"';
+            $sql .= '   OR p.product_brand_model_name LIKE "%'.$_POST['txtKey'].'%"';
+            $sql .= '   OR p.product_key_word LIKE "%'.$_POST['txtKey'].'%"';
+            $sql .= '   OR mc.category LIKE "%'.$_POST['txtKey'].'%"';
         }else if($_GET['id']!="" && $_GET['id']!="Enter Product ID" && $_GET['action']=='product-id'){
             $sql .= ' WHERE p.product_id="'.$_GET['id'].'"';
         }
