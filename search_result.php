@@ -296,6 +296,9 @@ $(document).ready(function(){
     function is_int(value){
         return (parseFloat(value) == parseInt(value)) ? true : false;
     }
+    function is_int2(value){
+        return (parseFloat(value) == parseInt(value)) ? parseInt(value) : false;
+    }
     pagination = function(curr, total){
         if(!is_int(total+0)){
             total = getTotalPage(total);
@@ -598,7 +601,7 @@ $(document).ready(function(){
             });
             $('.result-item-list').append( pagination(1, (productRefined_L2.length/pageItemLimit)) );
         }else{
-            $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+            $('.result-item-list').append( '<div class="item">Search criteria don\'t match any product!</div>' );            
         }
     }
     //-------------------------------------
@@ -648,7 +651,7 @@ $(document).ready(function(){
             });
             $('.result-item-list').append( pagination(1, (productRefined_L3.length/pageItemLimit)) );
         }else{
-            $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
+            $('.result-item-list').append( '<div class="item">Search criteria don\'t match any product!</div>' );            
         }
     }
     //-------------------------------------
@@ -670,24 +673,28 @@ $(document).ready(function(){
             if(tmp.length > 0){
                 productRefined = tmp;
                 $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+                    //alert(item.price+' : '+$('#selPriceRange').val());
                     $('.result-item-list').append( itemHTML(item) );
                 });
                 $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
             }else{
-                $('.result-item-list').append( '<div class="item">No company product found!</div>' );            
+                $('.result-item-list').append( '<div class="item">Search criteria don\'t match any product!</div>' );            
             }
         }
     });
     getRefineFormResult = function(data){
         var tmp = [];
+        var tmpPrice = 0;
         var priceRange = false;
         var itemCondition = false;
         var location = false;
         $.each(data, function(i,item){
-            priceRange = ($('#selPriceRange').val()!="") ? ($('#selPriceRange').val()>=item.price ? true : false) : true;
-            itemCondition = ($('#selItemCondition').val()!="") ? ($('#selItemCondition').val()==item.product_condition ? true : false) : true;
+            tmpPrice = is_int2(item.price);
+            priceRange = ($('#selPriceRange').val()!="") ? ($('#selPriceRange').val()>=tmpPrice && tmpPrice ? true : false) : true;
+            itemCondition = ($('#selItemCondition').val()!="") ? ($('#selItemCondition').val()==item.product_condition_id ? true : false) : true;
             location = ($('#selLocation').val()!="") ? ($('#selLocation').val()==item.country_id ? true : false) : true;
             if(priceRange && itemCondition && location){
+                item.price = tmpPrice ? tmpPrice : item.price;
                 tmp.push(item);
             }
         });

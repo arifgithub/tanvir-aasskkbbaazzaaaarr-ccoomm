@@ -63,6 +63,7 @@ class askBazaar{
                 "member_id" : "'.$row['member_id'].'",
                 "priority" : "1",
                 "account_type" : "'.$row['account_type'].'",
+                "product_condition_id" : "'.$row['product_condition_id'].'",
                 "product_condition" : "'.$row['product_condition'].'",
                 "member_type" : "'.$row['member_type'].'",
                 "country_id" : "'.$row['country_id'].'",
@@ -105,7 +106,8 @@ switch($_GET['action']){
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
                     mr.member_email, mr.member_companyname,
                     at.account_type,
-                    pcon.product_condition
+                    pcon.product_condition,
+                    pcon.id AS product_condition_id
                 FROM tbl_product p
                     LEFT JOIN tbl_product_condition pc ON pc.id=p.product_condition
                     LEFT JOIN product_image pi ON pi.product_id=p.product_id
