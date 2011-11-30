@@ -43,6 +43,10 @@ class askBazaar{
             //addslashes( iconv('ASCII', 'UTF-6//IGNORE',$row['product_name']))
             //addslashes( iconv('ASCII', 'ISO-8859-1//IGNORE',$row['product_name']))
             //mb_detect_encoding($row['product_name']);
+            
+            // These fields are getting problem with Google chrome browser:
+            //      location, model, mini_order, quantity_available, price
+            
             $json .= '{
         
                 "product_id" : "'.$row['product_id'].'",
