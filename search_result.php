@@ -32,7 +32,7 @@
                 <ul>
                     <li><input id="search-key" class="search-key" type="text" size="40" value="Select Products" name="txtKey" /></li>
                     <li>
-                        <select name="select" class="search-location">
+                        <select name="selLocation" class="search-location">
                             <option>Select Location</option>
                         </select>
                     </li>
@@ -441,7 +441,15 @@ $(document).ready(function(){
         });
     }
     getInitProduct( 'keyword-search' );
-    
+    //-------------------------------------
+    getInitCountryList = function(){
+        var url = './ajax_search.php?action=country-list';
+        $.get(url, function(data) {
+            var emptyOption = '<option value="">-Select Location-</option>';
+            $('#form1 .search-location').html(emptyOption+data);
+        });
+    }
+    getInitCountryList();
     //-------------------------------------
     $('ul#pagination li.next').live('click', function(){
         if($(this).hasClass('no-link')){ return false; }
