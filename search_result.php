@@ -509,6 +509,7 @@ $(document).ready(function(){
     $('#button-company').click(function(){
         //Reset 2nd Level Refine
         productRefined_L2 = [];
+        productBeforeRefineForm = [];
         //---------------------
         var tmp = [];
         clickedTab = 'Company';
@@ -530,6 +531,7 @@ $(document).ready(function(){
     $('#button-private').click(function(){
         //Reset 2nd Level Refine
         productRefined_L2 = [];
+        productBeforeRefineForm = [];
         //---------------------
         var tmp = [];
         clickedTab = 'Private';
@@ -552,6 +554,7 @@ $(document).ready(function(){
     $('#btn-seller').click(function(){
         //Reset 3rd Level Refine
         productRefined_L3 = [];
+        productBeforeRefineForm = [];
         //---------------------
         var tmp = [];
         $('.result-item-list').html('');
@@ -574,6 +577,7 @@ $(document).ready(function(){
     $('#btn-buyer').click(function(){
         //Reset 3rd Level Refine
         productRefined_L3 = [];
+        productBeforeRefineForm = [];
         //---------------------
         var tmp = [];
         $('.result-item-list').html('');
@@ -607,6 +611,7 @@ $(document).ready(function(){
     //-------------------------------------
     $('#btn-top-sell').click(function(){
         var tmp = [];
+        productBeforeRefineForm = [];
         $('.result-item-list').html('');
         if(productRefined_L2.length>0){
             $.each(productRefined_L2, function(i,item){
@@ -626,6 +631,7 @@ $(document).ready(function(){
     });
     $('#btn-urgent-sell').click(function(){
         var tmp = [];
+        productBeforeRefineForm = [];
         $('.result-item-list').html('');
         if(productRefined_L2.length>0){
             $.each(productRefined_L2, function(i,item){
