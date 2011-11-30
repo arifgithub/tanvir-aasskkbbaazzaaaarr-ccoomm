@@ -128,6 +128,15 @@
                     <label for="selPriceRange">Price Range</label>
                     <select class="ash_text11" id="selPriceRange" name="selPriceRange">
                         <option value="">Please Select</option>
+                        <option value="1000">1,000 BDT</option>
+                        <option value="2000">2,000 BDT</option>
+                        <option value="5000">5,000 BDT</option>
+                        <option value="10000">10,000 BDT</option>
+                        <option value="15000">15,000 BDT</option>
+                        <option value="20000">20,000 BDT</option>
+                        <option value="30000">30,000 BDT</option>
+                        <option value="50000">50,000 BDT</option>
+                        <option value="150000">1,50,000 BDT</option>
                     </select><br/>
                     <label for="selItemCondition">Item Condition</label>
                     <select class="ash_text11" id="selItemCondition" name="selItemCondition">
@@ -138,7 +147,7 @@
                         <option value="">Please Select</option>
                     </select><br/>
                     <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
-                        <input type="submit" value="Search" class="black_text11 bottom-space10" name="Submit" /><br/>
+                        <input type="button" value="Search" class="btn-submit black_text11 bottom-space10" name="Submit" /><br/>
                         Any one option you can Choose <br>for Refine Your Search
                     </div>
                 </div>
@@ -365,6 +374,7 @@ $(document).ready(function(){
     var productRefined = [];
     var productRefined_L2 = [];
     var productRefined_L3 = [];
+    var productBeforeRefineForm = [];
     var currentPage = 1;
     var pageItemLimit = 10;
     var pageLimit = 7;
@@ -640,6 +650,48 @@ $(document).ready(function(){
         }else{
             $('.result-item-list').append( '<div class="item">No private product found!</div>' );            
         }
+    }
+    //-------------------------------------
+    $('#refine-search .btn-submit').click(function(){
+        var tmp = [];
+        $('.result-item-list').html('');
+        //alert(productRefined.length);
+        if( productRefined_L3.length > 0 ){
+            productBeforeRefineForm = (productBeforeRefineForm.length==0) ? productRefined_L3 : productBeforeRefineForm;
+            tmp = getRefineFormResult(productBeforeRefineForm);
+            showTypedItems(tmp);
+        }else if( productRefined_L2.length > 0 ){
+            productBeforeRefineForm = (productBeforeRefineForm.length==0) ? productRefined_L2 : productBeforeRefineForm;
+            tmp = getRefineFormResult(productBeforeRefineForm);
+            showSellerBuyerItems(tmp);
+        }else{
+            productBeforeRefineForm = (productBeforeRefineForm.length==0) ? productRefined : productBeforeRefineForm;
+            tmp = getRefineFormResult(productBeforeRefineForm);
+            if(tmp.length > 0){
+                productRefined = tmp;
+                $.each(productRefined.slice(0, pageItemLimit), function(i,item){
+                    $('.result-item-list').append( itemHTML(item) );
+                });
+                $('.result-item-list').append( pagination(1, (productRefined.length/pageItemLimit)) );
+            }else{
+                $('.result-item-list').append( '<div class="item">No company product found!</div>' );            
+            }
+        }
+    });
+    getRefineFormResult = function(data){
+        var tmp = [];
+        var priceRange = false;
+        var itemCondition = false;
+        var location = false;
+        $.each(data, function(i,item){
+            priceRange = ($('#selPriceRange').val()!="") ? ($('#selPriceRange').val()>=item.price ? true : false) : true;
+            itemCondition = ($('#selItemCondition').val()!="") ? ($('#selItemCondition').val()==item.product_condition ? true : false) : true;
+            location = ($('#selLocation').val()!="") ? ($('#selLocation').val()==item.country_id ? true : false) : true;
+            if(priceRange && itemCondition && location){
+                tmp.push(item);
+            }
+        });
+        return tmp;
     }
     //-------------------------------------
 });
