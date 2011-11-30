@@ -65,6 +65,7 @@ class askBazaar{
                 "account_type" : "'.$row['account_type'].'",
                 "product_condition" : "'.$row['product_condition'].'",
                 "member_type" : "'.$row['member_type'].'",
+                "country_id" : "'.$row['country_id'].'",
                 "is_company" : '.($row['member_type']=='Private'?'false':'true').',
                 "is_private" : false,
                 "is_seller" : '.($row['account_type']!='Seller'?'false':'true').',
@@ -99,6 +100,7 @@ switch($_GET['action']){
                     p.product_quantity_available, p.product_price, p.product_type,
                     pi.product_image_name,
                     pt.payment_terms,
+                    c.id AS country_id,
                     mc.category,
                     mr.member_id, mr.member_type, mr.member_firstname, mr.member_lastname,
                     mr.member_email, mr.member_companyname,
@@ -139,6 +141,15 @@ switch($_GET['action']){
         //var_dump($sql);
         while($row = mysql_fetch_assoc($res)){
             echo '<option value="'.$row['id'].'">'.$row['country'].'</option>';
+        }
+        break;
+
+    case 'product-condition-list':
+        $sql = "SELECT * FROM tbl_product_condition ORDER BY id";
+        $res = mysql_query($sql);
+        //var_dump($sql);
+        while($row = mysql_fetch_assoc($res)){
+            echo '<option value="'.$row['id'].'">'.$row['product_condition'].'</option>';
         }
         break;
 }

@@ -126,18 +126,15 @@
                 </ul>
                 <div class="search-form blue-box black_text11">
                     <label for="selPriceRange">Price Range</label>
-                    <select class="ash_text11" name="selPriceRange">
+                    <select class="ash_text11" id="selPriceRange" name="selPriceRange">
                         <option value="">Please Select</option>
                     </select><br/>
                     <label for="selItemCondition">Item Condition</label>
-                    <select class="ash_text11" name="selItemCondition">
+                    <select class="ash_text11" id="selItemCondition" name="selItemCondition">
                         <option value="">Please Select</option>
-                        <option value="">New</option>
-                        <option value="">Used</option>
-                        <option value="">Refabrished</option>
                     </select><br/>
                     <label for="selLocation">Location</label>
-                    <select class="ash_text11" name="selLocation">
+                    <select class="ash_text11" id="selLocation" name="selLocation">
                         <option value="">Please Select</option>
                     </select><br/>
                     <div class="MyAskBazar_text12_BOLD centerText top-space10 bottom-space10">
@@ -442,11 +439,19 @@ $(document).ready(function(){
     }
     getInitProduct( 'keyword-search' );
     //-------------------------------------
+    getInitProductConditionList = function(){
+        var url = './ajax_search.php?action=product-condition-list';
+        $.get(url, function(data) {
+            $('#selItemCondition').html('<option value="">Please Select</option>'+data);
+        });
+    }
+    getInitProductConditionList();
+    //-------------------------------------
     getInitCountryList = function(){
         var url = './ajax_search.php?action=country-list';
         $.get(url, function(data) {
-            var emptyOption = '<option value="">-Select Location-</option>';
-            $('#form1 .search-location').html(emptyOption+data);
+            $('#form1 .search-location').html('<option value="">-Select Location-</option>'+data);
+            $('#selLocation').html('<option value="">Please Select</option>'+data);
         });
     }
     getInitCountryList();
