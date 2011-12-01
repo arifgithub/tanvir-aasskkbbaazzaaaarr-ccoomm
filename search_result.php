@@ -419,6 +419,7 @@ $(document).ready(function(){
                     $.each(product.items.slice(0, pageItemLimit), function(i,item){
                         $('.result-item-list').append( itemHTML(item) );
                     });
+                    currentPage = 1;
                     totalPage = getTotalPage(product.items.length/pageItemLimit);
                     $('.result-item-list').append( pagination(1, totalPage) );
                 }else{
@@ -431,7 +432,12 @@ $(document).ready(function(){
     });
     
     $('#form2').submit(function(){
-        getInitProduct( 'product-id&id='+$('#key-product-id').val() );
+        var pid = $('#key-product-id').val().replace('/[ ]*/g','');
+        if(pid!="" && pid!='Enter Product ID'){
+            getInitProduct( 'product-id&id='+$('#key-product-id').val() );
+        }else{
+            alert('You should enter a valid ID');
+        }
         return false;
     });
     //var iNum1 = 10;
@@ -466,6 +472,7 @@ $(document).ready(function(){
                 $.each(product.items.slice(0, pageItemLimit), function(i,item){
                     $('.result-item-list').append( itemHTML(item) );
                 });
+                currentPage = 1;
                 totalPage = getTotalPage(product.items.length/pageItemLimit);
                 $('.result-item-list').append( pagination(1, totalPage) );
             }else{
