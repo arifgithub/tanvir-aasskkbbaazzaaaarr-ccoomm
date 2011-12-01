@@ -404,6 +404,7 @@ $(document).ready(function(){
                     productRefined = [];
                     $.each(product.items, function(i,item){
                         //----------------
+                        item.product_auto_id = decode_base64(item.product_auto_id);
                         item.location = decode_base64(item.location);
                         item.title = decode_base64(item.title);
                         item.model = decode_base64(item.model);
@@ -447,8 +448,10 @@ $(document).ready(function(){
             //console.log(product);
             //alert(product.items.length);
             if(product.items.length > 0){
+                productRefined = [];
                 $.each(product.items, function(i,item){
                     //----------------
+                    item.product_auto_id = decode_base64(item.product_auto_id);
                     item.location = decode_base64(item.location);
                     item.title = decode_base64(item.title);//+'::'+item.product_id;
                     item.model = decode_base64(item.model);

@@ -50,7 +50,7 @@ class askBazaar{
             $json .= '{
         
                 "product_id" : "'.$row['product_id'].'",
-                "product_auto_id" : "'.addslashes($row['product_auto_id']).'",'
+                "product_auto_id" : "'.addslashes(base64_encode($row['product_auto_id'])).'",'
                 /* product_type => Hot Sell(1), Store(2), Top Sell(3), Urgent Sell(4), Recent Sell(5), Featured(0) */.'
                 "product_type" : "'.$row['product_type'].'",
                 "company" : "'.addslashes($row['member_companyname']).'",
@@ -134,7 +134,7 @@ switch($_GET['action']){
             $sql .= '   OR mc.category LIKE "%'.$_POST['txtKey'].'%" ) ';
         }
         if($_GET['id']!="" && $_GET['id']!="Enter Product ID" && $_GET['action']=='product-id'){
-            $sql .= ' AND p.product_id="'.$_GET['id'].'"';
+            $sql .= ' AND p.product_auto_id="'.$_GET['id'].'"';
         }
         $sql .= " GROUP BY p.product_id
                   ORDER BY p.product_id DESC";
