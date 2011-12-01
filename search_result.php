@@ -344,7 +344,7 @@ $(document).ready(function(){
         HTML += '           <strong class="black_text11">'+data.product_auto_id+'</strong>';
         HTML += '       </div>';
         HTML += '       <div class="col-left-2">';
-        HTML += '           <a class="search_title_link12" target="_blank" href="#">'+decode_base64(data.title)+'</a>';
+        HTML += '           <a class="search_title_link12" target="_blank" href="#">'+data.title+'</a>';
         HTML += '           <div class="model black_text12 top-bottom-space5">'+data.model+'</div>';
         HTML += '           <div class="black_text12 bottom-space10">';
         HTML +=                 data.comment;
@@ -393,18 +393,27 @@ $(document).ready(function(){
 			dataType: 'text',
 			cache: false,
 			complete: function(data){
-                //alert(data);
+                //alert(data.responseText);
                 product = jQuery.parseJSON(data.responseText);
-                //alert(product);
+                //alert(decode_base64(product.items[0].title));
                 $('.result-item-list').html('');
                 //alert(product.items[0].image);
                 //console.log(product);
                 //alert(product.items.length);
                 if(product.items.length > 0){
-                    //$.each(product.items, function(i,item){
-                    //    productRefined.push(item);
-                    //});
-                    productRefined = product.items;
+                    productRefined = [];
+                    $.each(product.items, function(i,item){
+                        //----------------
+                        item.location = decode_base64(item.location);
+                        item.title = decode_base64(item.title);
+                        item.model = decode_base64(item.model);
+                        item.mini_order = decode_base64(item.mini_order);
+                        item.quantity_available = decode_base64(item.quantity_available);
+                        item.price = decode_base64(item.price);
+                        //----------------
+                        productRefined.push(item);
+                    });
+                    product.items = productRefined;
                     //alert(productRefined);
                     $.each(product.items.slice(0, pageItemLimit), function(i,item){
                         $('.result-item-list').append( itemHTML(item) );
@@ -424,7 +433,10 @@ $(document).ready(function(){
         getInitProduct( 'product-id&id='+$('#key-product-id').val() );
         return false;
     });
-    
+    //var iNum1 = 10;
+    //alert(iNum1.toString(2));
+    //alert(iNum1.toString(8));
+    //alert(iNum1.toString(16));
     getInitProduct = function( action ){
         var url = './ajax_search.php?action='+action;
         $.get(url, function(data) {
@@ -435,10 +447,18 @@ $(document).ready(function(){
             //console.log(product);
             //alert(product.items.length);
             if(product.items.length > 0){
-                //$.each(product.items, function(i,item){
-                //    productRefined.push(item);
-                //});
-                productRefined = product.items;
+                $.each(product.items, function(i,item){
+                    //----------------
+                    item.location = decode_base64(item.location);
+                    item.title = decode_base64(item.title);//+'::'+item.product_id;
+                    item.model = decode_base64(item.model);
+                    item.mini_order = decode_base64(item.mini_order);
+                    item.quantity_available = parseInt(decode_base64(item.quantity_available));
+                    item.price = decode_base64(item.price);
+                    //----------------
+                    productRefined.push(item);
+                });
+                product.items = productRefined;
                 //alert(productRefined);
                 $.each(product.items.slice(0, pageItemLimit), function(i,item){
                     $('.result-item-list').append( itemHTML(item) );
@@ -710,6 +730,13 @@ $(document).ready(function(){
 });
 </script>
 
+<?php
+//
+//$output = "Clean this copy of invalid non ASCII äóch��aracters.";
+//$output = preg_replace('/[^(\x20-\x7F)]*/','', $output);
+//echo($output);
+
+?>
 </body>
 
 </html>

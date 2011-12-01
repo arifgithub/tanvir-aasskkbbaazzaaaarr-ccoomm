@@ -54,15 +54,15 @@ class askBazaar{
                 /* product_type => Hot Sell(1), Store(2), Top Sell(3), Urgent Sell(4), Recent Sell(5), Featured(0) */.'
                 "product_type" : "'.$row['product_type'].'",
                 "company" : "'.addslashes($row['member_companyname']).'",
-                "location" : "'.addslashes($row['product_delivery_place']).'",
+                "location" : "'.addslashes(base64_encode($row['product_delivery_place'])).'",
                 "title" : "'.addslashes(base64_encode($row['product_name'])).'",
-                "model" : "'.addslashes($row['product_brand_model_name']).'",
+                "model" : "'.addslashes(base64_encode($row['product_brand_model_name'])).'",
                 "image" : "'.addslashes($row['product_image_name']).'",
                 "comment" : "'.addslashes(str_replace("\n","<br>",$row['product_summary'])).'",
                 "payment" : "'.addslashes($row['payment_terms']).'",
-                "mini_order" : "'.addslashes($row['product_minimum_order']).'",
-                "quantity_available" : "'.addslashes($row['product_quantity_available']).'",
-                "price" : "'.addslashes($row['product_price']).'",
+                "mini_order" : "'.addslashes(base64_encode($row['product_minimum_order'])).'",
+                "quantity_available" : "'.addslashes(base64_encode($row['product_quantity_available'])).'",
+                "price" : "'.addslashes(base64_encode($row['product_price'])).'",
                 "verified" : "Company Ad",
                 "member_id" : "'.$row['member_id'].'",
                 "priority" : "1",
@@ -85,6 +85,8 @@ class askBazaar{
         }
         $json = rtrim($json, ",\n");
         $json .= '    ] }';
+        
+        //$output = preg_replace('/[^(\x20-\x7F)]*/','', $output);
         
         echo $json;
     }
